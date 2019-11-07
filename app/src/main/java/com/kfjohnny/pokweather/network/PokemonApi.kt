@@ -11,5 +11,5 @@ interface PokemonApi {
      * Get the pokemon from the API
      */
     @GET("pokemon/{id}")
-    suspend fun getPokemon(@Path(ID_FIELD) pokemonId : Int) : Response<Pokemon>
+    suspend fun getPokemon(@Path(ID_FIELD) pokemonId: String) : Response<Pokemon>
 }

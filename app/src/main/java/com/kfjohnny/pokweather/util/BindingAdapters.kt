@@ -45,10 +45,10 @@ fun setTextColor(view: TextView, text: MutableLiveData<String>?) {
 }
 
 @BindingAdapter("glideSrc")
-fun setGlideSrc(view: ImageView, text: MutableLiveData<String>?) {
+fun setGlideSrc(view: ImageView, text: String?) {
     val parentActivity:AppCompatActivity? = view.getParentActivity()
     if(parentActivity != null && text != null) {
-        text.observe(parentActivity, Observer { value -> Glide.with(view.context).load(value).into(view);})
+        Glide.with(view.context).load(text).into(view)
     }
 }
 

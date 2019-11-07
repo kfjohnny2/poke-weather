@@ -7,5 +7,7 @@ import retrofit2.http.Path
 
 interface PokemonRepository{
 
-    suspend fun getPokemon(@Path(ID_FIELD) pokemonId : Int) : UseCaseResult<Pokemon>
+    suspend fun getPokemon(@Path(ID_FIELD) pokemonId: String) : UseCaseResult<Pokemon>
+
+    suspend fun getPokemonList() : UseCaseResult<List<Pokemon>>
 }

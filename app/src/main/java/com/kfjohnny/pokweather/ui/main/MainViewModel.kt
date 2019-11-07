@@ -1,5 +1,6 @@
 package com.kfjohnny.pokweather.ui.main
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.kfjohnny.pokweather.base.UseCaseResult
@@ -20,13 +21,16 @@ class MainViewModel(private val pokemonRepository: PokemonRepository) : ViewMode
         showLoading.value = true
 
         launch {
-            val result = withContext(Dispatchers.IO){pokemonRepository.getPokemon(1)}
+            val result = withContext(Dispatchers.IO){pokemonRepository.getPokemon("1")}
 
             showLoading.value = false
 
             when(result){
                 is UseCaseResult.Success -> pokemonData.value = result.data
-                is UseCaseResult.Error -> showError.value = result.exception.message
+                is UseCaseResult.Error -> {
+                    showError.value = result.exception.message
+                    Log.d("ERROR", result.exception.message!!)
+                }
             }
         }
     }
