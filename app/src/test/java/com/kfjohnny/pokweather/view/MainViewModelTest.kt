@@ -27,9 +27,6 @@ class MainViewModelTest : KoinTest {
     private val repository by inject<PokemonRepository>()
 
     @Mock
-    lateinit var apiMock : PokemonApi
-
-    @Mock
     lateinit var uiData: Observer<Pokemon>
 
     @get:Rule
