@@ -3,6 +3,7 @@ package com.kfjohnny.pokweather.ui.main
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -21,6 +22,17 @@ class MainActivity : AppCompatActivity() {
 
         initViewModel()
 
+        binding.edSearchPokemon.setOnEditorActionListener { v, actionId, _ ->
+            return@setOnEditorActionListener when (actionId) {
+                EditorInfo.IME_ACTION_SEARCH -> {
+                    viewModel.loadPokemon(v.text.toString())
+                    false
+                }
+                else -> false
+            }
+        }
+
+
         binding.lifecycleOwner = this
 
         binding.viewModel = viewModel
@@ -36,6 +48,5 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, showError, Toast.LENGTH_SHORT).show()
         })
         // The observers are set, we can now ask API to load a data list
-        viewModel.loadPokemon()
     }
 }

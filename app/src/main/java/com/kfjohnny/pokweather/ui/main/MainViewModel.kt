@@ -17,11 +17,11 @@ class MainViewModel(private val pokemonRepository: PokemonRepository) : ViewMode
     val pokemonData = MutableLiveData<Pokemon>()
     val showError = MutableLiveData<String>()
 
-    fun loadPokemon(){
+    fun loadPokemon(pokemonSearch : String){
         showLoading.value = true
 
         launch {
-            val result = withContext(Dispatchers.IO){pokemonRepository.getPokemon("1")}
+            val result = withContext(Dispatchers.IO){pokemonRepository.getPokemon(pokemonSearch)}
 
             showLoading.value = false
 
