@@ -22,17 +22,6 @@ class MainActivity : AppCompatActivity() {
 
         initViewModel()
 
-        binding.edSearchPokemon.setOnEditorActionListener { v, actionId, _ ->
-            return@setOnEditorActionListener when (actionId) {
-                EditorInfo.IME_ACTION_SEARCH -> {
-                    viewModel.loadPokemon(v.text.toString())
-                    false
-                }
-                else -> false
-            }
-        }
-
-
         binding.lifecycleOwner = this
 
         binding.viewModel = viewModel

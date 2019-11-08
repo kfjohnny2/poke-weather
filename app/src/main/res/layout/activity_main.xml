@@ -19,9 +19,11 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:hint="@string/main_pokemon_name_or_id_hint"
-            android:drawableEnd="@drawable/ic_search"
-            android:drawableRight="@drawable/ic_search"
-            android:imeOptions="actionSearch"/>
+            android:drawableStart="@drawable/ic_search"
+            android:drawableLeft="@drawable/ic_search"
+            android:drawablePadding="10dp"
+            android:imeOptions="actionSearch"
+            app:onImeOption="@{()->viewModel.loadPokemon(edSearchPokemon.getText().toString())}"/>
 
         <TextView
             android:id="@+id/txtPokemonName"
