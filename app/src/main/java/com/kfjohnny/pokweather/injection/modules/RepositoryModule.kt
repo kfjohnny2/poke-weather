@@ -1,7 +1,10 @@
 package com.kfjohnny.pokweather.injection.modules
 
+import android.content.Context
+import androidx.room.Room
 import com.google.gson.GsonBuilder
 import com.kfjohnny.pokweather.BuildConfig.API_URL
+import com.kfjohnny.pokweather.data.config.PokemonWeatherDatabase
 import com.kfjohnny.pokweather.network.PokemonApi
 import com.kfjohnny.pokweather.ui.main.MainViewModel
 import com.kfjohnny.pokweather.ui.main.repository.PokemonRepository
@@ -14,11 +17,17 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-val networkModules = module {
+val repositoryModules = module {
     single {
         createWebService<PokemonApi>()
     }
-    factory<PokemonRepository> { PokemonRepositoryImpl(pokemonApi = get()) }
+    single {
+        createRoomDatabase(get())
+    }
+
+    single { get<PokemonWeatherDatabase>().pokemonSampleDao() }
+
+    factory<PokemonRepository> { PokemonRepositoryImpl(pokemonApi = get(), pokemonSampleDAO = get()) }
     viewModel { MainViewModel(pokemonRepository = get()) }
 }
 
@@ -43,4 +52,9 @@ inline fun <reified T> createWebService(): T {
         .client(createHttpClient())
         .build()
     return retrofit.create(T::class.java)
+}
+
+fun createRoomDatabase(context: Context){
+    Room.databaseBuilder(context, PokemonWeatherDatabase::class.java, "pokeweather-db")
+        .build()
 }

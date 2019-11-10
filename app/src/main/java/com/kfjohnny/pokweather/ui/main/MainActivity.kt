@@ -6,12 +6,14 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.kfjohnny.pokweather.R
 import com.kfjohnny.pokweather.databinding.ActivityMainBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
     private val viewModel by viewModel<MainViewModel>()
     private lateinit var binding: ActivityMainBinding

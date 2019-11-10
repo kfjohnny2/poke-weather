@@ -3,7 +3,7 @@ package com.kfjohnny.pokweather.view
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.kfjohnny.pokweather.base.UseCaseResult
-import com.kfjohnny.pokweather.injection.modules.networkModules
+import com.kfjohnny.pokweather.injection.modules.repositoryModules
 import com.kfjohnny.pokweather.model.pokemon.Pokemon
 import com.kfjohnny.pokweather.ui.main.MainViewModel
 import com.kfjohnny.pokweather.ui.main.repository.PokemonRepository
@@ -15,10 +15,8 @@ import org.junit.Test
 import org.koin.core.context.startKoin
 import org.koin.test.KoinTest
 import org.koin.test.inject
-import org.koin.test.mock.declareMock
 import org.mockito.Mock
 import org.mockito.Mockito
-import org.mockito.MockitoAnnotations
 
 class MainViewModelTest : KoinTest {
     private val viewModel by inject<MainViewModel>()
@@ -33,7 +31,7 @@ class MainViewModelTest : KoinTest {
     @Before
     fun before() {
         startKoin {
-            modules(networkModules)
+            modules(repositoryModules)
         }
     }
 
