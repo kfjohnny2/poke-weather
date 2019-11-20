@@ -7,7 +7,7 @@ import com.kfjohnny.pokweather.model.search.PokemonSample
 import com.kfjohnny.pokweather.model.search.SearchResult
 import com.kfjohnny.pokweather.network.PokemonApi
 
-class PokemonRepositoryImpl(private val pokemonApi: PokemonApi, private val pokemonSampleDAO: PokemonSampleDAO) : PokemonRepository {
+class PokemonRepositoryImpl(val pokemonApi: PokemonApi, val pokemonSampleDAO: PokemonSampleDAO) : PokemonRepository {
     override suspend fun insertPokemons(pokemonSampleList: List<PokemonSample>) {
         pokemonSampleDAO.saveAll(pokemonSampleList)
     }

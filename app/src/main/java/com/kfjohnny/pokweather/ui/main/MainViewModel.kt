@@ -13,7 +13,7 @@ import com.kfjohnny.pokweather.ui.main.repository.PokemonRepository
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-class MainViewModel(private val pokemonRepository: PokemonRepository) : BaseViewModel() {
+class MainViewModel(val pokemonRepository: PokemonRepository) : BaseViewModel() {
     val pokemonData = MutableLiveData<Pokemon>()
     val pokemonsData = MutableLiveData<SearchResult>()
 
@@ -32,7 +32,7 @@ class MainViewModel(private val pokemonRepository: PokemonRepository) : BaseView
             when (result) {
                 is UseCaseResult.Success -> {
                     pokemonsData.value = result.data
-                    pokemonRepository.insertPokemons(result.data.results)
+                    withContext(Dispatchers.IO){pokemonRepository.insertPokemons(result.data.results)}
                     Log.d("DATA", result.data.results.toString())
                 }
                 is UseCaseResult.Error -> {

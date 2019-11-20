@@ -12,7 +12,6 @@ import com.kfjohnny.pokweather.ui.main.repository.PokemonRepositoryImpl
 import okhttp3.OkHttpClient
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
-import retrofit2.CallAdapter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -22,12 +21,18 @@ val repositoryModules = module {
         createWebService<PokemonApi>()
     }
     single {
-        createRoomDatabase(get())
+        Room.databaseBuilder(get(), PokemonWeatherDatabase::class.java, "pokeweather-db")
+            .build()
     }
 
     single { get<PokemonWeatherDatabase>().pokemonSampleDao() }
 
-    factory<PokemonRepository> { PokemonRepositoryImpl(pokemonApi = get(), pokemonSampleDAO = get()) }
+    factory<PokemonRepository> {
+        PokemonRepositoryImpl(
+            pokemonApi = get(),
+            pokemonSampleDAO = get()
+        )
+    }
     viewModel { MainViewModel(pokemonRepository = get()) }
 }
 
@@ -54,7 +59,7 @@ inline fun <reified T> createWebService(): T {
     return retrofit.create(T::class.java)
 }
 
-fun createRoomDatabase(context: Context){
+inline fun <reified T> createRoomDatabase(context: Context) {
     Room.databaseBuilder(context, PokemonWeatherDatabase::class.java, "pokeweather-db")
         .build()
 }
