@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder
 import com.kfjohnny.pokweather.BuildConfig.API_URL
 import com.kfjohnny.pokweather.data.config.PokemonWeatherDatabase
 import com.kfjohnny.pokweather.network.PokemonApi
+import com.kfjohnny.pokweather.ui.description.DetailsViewModel
 import com.kfjohnny.pokweather.ui.main.MainViewModel
 import com.kfjohnny.pokweather.ui.main.repository.PokemonRepository
 import com.kfjohnny.pokweather.ui.main.repository.PokemonRepositoryImpl
