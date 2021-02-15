@@ -40,7 +40,7 @@ class MainViewModelTest : KoinTest {
         val pokemon = runBlocking { repository.getPokemon("1") }
         viewModel.pokemonData.observeForever(uiData)
 
-        viewModel.loadPokemon()
+        viewModel.loadPokemon("1")
 
         Assert.assertNotNull(viewModel.pokemonData.value)
 

@@ -43,11 +43,12 @@ class MainViewModel(val pokemonRepository: PokemonRepository) : BaseViewModel() 
         }
     }
 
-    fun loadPokemon(pokemonSearch: String) {
+    fun loadPokemon(pokemonSearch : String) {
+        val search = pokemonSearch
         showLoading.value = true
 
         launch {
-            val result = withContext(Dispatchers.IO) { pokemonRepository.getPokemon(pokemonSearch) }
+            val result = withContext(Dispatchers.IO) { pokemonRepository.getPokemon(search) }
 
             showLoading.value = false
 
