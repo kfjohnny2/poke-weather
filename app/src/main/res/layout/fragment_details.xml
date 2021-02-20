@@ -24,6 +24,14 @@
             app:glideSrc="@{detailsViewModel.pokemonData.sprites.frontDefault}"
             android:src="@mipmap/ic_launcher"/>
 
+        <CheckBox
+            android:id="@+id/cbFav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="?android:attr/starStyle"/>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clPokemonDetailsContent"
             android:layout_width="match_parent"
@@ -129,6 +137,14 @@
                     android:textSize="12sp"
                     android:textStyle="bold"/>
             </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvAbilities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:adapter="@{detailsViewModel.pokemonData.abilities}"
+                android:layout_marginTop="@dimen/default_vertical_margin"
+                app:layout_constraintTop_toBottomOf="@id/llPokemonWeight"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

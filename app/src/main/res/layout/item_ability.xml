@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="abilityViewModel"
+            type="com.kfjohnny.pokweather.ui.description.adapter.AbilityItemViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding_size">
+
+        <TextView
+            android:id="@+id/txtAbility"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:mutableText="@{abilityViewModel.getAbilityName()}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
