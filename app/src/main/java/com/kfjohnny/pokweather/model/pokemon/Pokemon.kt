@@ -36,7 +36,7 @@ data class Pokemon(
     val species: Species,
     val sprites: Sprites,
     val stats: List<Stats>,
-    val types: List<Types>
+    val types: List<Types>?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
@@ -55,7 +55,7 @@ data class Pokemon(
         TODO("species"),
         TODO("sprites"),
         TODO("stats"),
-        TODO("types")
+        parcel.createTypedArrayList(Types)
     ) {
     }
 

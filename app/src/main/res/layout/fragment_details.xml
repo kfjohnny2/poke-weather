@@ -61,7 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:text="@{String.valueOf(detailsViewModel.pokemonData.weight)}"
+                    android:text="@{String.valueOf(detailsViewModel.pokemonData.weight) + `kg`}"
                     android:textStyle="bold"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -84,21 +84,22 @@
                 android:layout_marginStart="@dimen/default_horizontal_margin"
                 android:gravity="center">
 
-                <ImageView
-                    android:id="@+id/imgPokemonType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:src="@drawable/ic_search"
-                    android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/txtPokemonType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="@{detailsViewModel.pokemonData.types.get(0).type.typeName}"
+                    android:src="@drawable/ic_search"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/txtPokemonTypeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:textAllCaps="true"
                     android:textColor="#B8B8B8"
-                    android:text="Water"
                     android:textSize="12sp"
+                    android:text="Type"
                     android:textStyle="bold"/>
             </LinearLayout>
             <LinearLayout
@@ -116,7 +117,7 @@
                     android:id="@+id/txtPokemonHeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{String.valueOf(detailsViewModel.pokemonData.height)}"
+                    android:text="@{String.valueOf(detailsViewModel.pokemonData.height)+ `m`}"
                     android:textSize="18sp"
                     android:textStyle="bold"/>
                 <TextView
