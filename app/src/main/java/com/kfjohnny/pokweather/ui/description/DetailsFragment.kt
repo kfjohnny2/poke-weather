@@ -1,32 +1,37 @@
 package com.kfjohnny.pokweather.ui.description
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.kfjohnny.pokweather.R
+import com.kfjohnny.pokweather.base.BaseFragment
+import com.kfjohnny.pokweather.databinding.FragmentDetailsBinding
+import com.kfjohnny.pokweather.ui.main.MainViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
-class DetailsFragment : Fragment() {
+class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
 
-    companion object {
-        fun newInstance() = DetailsFragment()
-    }
+    override fun layoutRes(): Int = R.layout.fragment_details
 
-    private lateinit var viewModel: DetailsViewModel
+    private val detailsViewModel by viewModel<DetailsViewModel>()
+
+    val args: DetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.details_fragment, container, false)
-    }
+        super.onCreateView(inflater, container, savedInstanceState)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(DetailsViewModel::class.java)
-        // TODO: Use the ViewModel
+        val pokemon = args.pokemon
+        detailsViewModel.pokemonData.value = pokemon
+
+        binding.detailsViewModel = detailsViewModel
+
+        return binding.root
     }
 
 }

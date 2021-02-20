@@ -4,6 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.kfjohnny.pokweather.base.UseCaseResult
 import com.kfjohnny.pokweather.injection.modules.repositoryModules
+import com.kfjohnny.pokweather.injection.modules.roomModule
 import com.kfjohnny.pokweather.model.pokemon.Pokemon
 import com.kfjohnny.pokweather.ui.main.MainViewModel
 import com.kfjohnny.pokweather.ui.main.repository.PokemonRepository
@@ -31,7 +32,7 @@ class MainViewModelTest : KoinTest {
     @Before
     fun before() {
         startKoin {
-            modules(repositoryModules)
+            modules(listOf(repositoryModules, roomModule))
         }
     }
 

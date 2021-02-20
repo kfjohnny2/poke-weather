@@ -28,13 +28,14 @@ val repositoryModules = module {
 
     single { get<PokemonWeatherDatabase>().pokemonSampleDao() }
 
-    factory<PokemonRepository> {
+    single<PokemonRepository> {
         PokemonRepositoryImpl(
             pokemonApi = get(),
             pokemonSampleDAO = get()
         )
     }
     viewModel { MainViewModel(pokemonRepository = get()) }
+    viewModel { DetailsViewModel() }
 }
 
 /* Returns a custom OkHttpClient instance with interceptor. Used for building Retrofit service */

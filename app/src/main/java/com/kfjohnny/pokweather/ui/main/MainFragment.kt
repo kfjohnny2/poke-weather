@@ -40,8 +40,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
     }
 
     private fun navigateToDetails(){
-        val directions = MainFragmentDirections.actionMainFragmentToDetailsFragment()
-        binding.root.findNavController().navigate(directions)
+        val pokemon = mainViewModel.pokemonData.value
+        if(pokemon != null) {
+            val directions = MainFragmentDirections.actionMainFragmentToDetailsFragment(pokemon)
+            binding.root.findNavController().navigate(directions)
+        }
     }
 
     private fun initViewModel() {
