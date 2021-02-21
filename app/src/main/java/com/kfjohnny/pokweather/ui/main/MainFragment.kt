@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import com.kfjohnny.pokweather.R
 import com.kfjohnny.pokweather.base.BaseFragment
 import com.kfjohnny.pokweather.databinding.FragmentMainBinding
+import com.kfjohnny.pokweather.util.extensions.hideKeyboard
 import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
@@ -48,6 +49,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
     }
 
     private fun initViewModel() {
+        mainViewModel.pokemonData.observe(viewLifecycleOwner, Observer {
+            hideKeyboard()
+        })
         // Observe showLoading value and display or hide our activity's progressBar
         mainViewModel.showLoading.observe(viewLifecycleOwner, Observer { showLoading ->
             //mainProgressBar.visibility = if (showLoading!!) View.VISIBLE else View.GONE

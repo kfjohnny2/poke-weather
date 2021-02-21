@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             app:mutableText="@{abilityViewModel.getAbilityName()}"
             app:layout_constraintStart_toStartOf="parent"
+            android:textColor="#000000"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
