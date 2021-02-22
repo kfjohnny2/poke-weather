@@ -3,4 +3,8 @@
     <string name="main_pokemon_name_or_id_hint">Pokémon name or id</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="details_moves_label">Moves</string>
+    <string name="details_height_label">Height</string>
+    <string name="details_type_label">Type</string>
+    <string name="details_weight_label">Weight</string>
 </resources>

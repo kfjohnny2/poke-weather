@@ -9,7 +9,7 @@ import com.kfjohnny.pokweather.util.NAME_FIELD
 
 data class Ability(
     @SerializedName(NAME_FIELD)
-    val abilityName: String?,
+    val abilityName: String,
     @SerializedName(URL_FIELD)
     val abilityUrl: String?,
     @SerializedName(IS_HIDDEN_FIELD)
@@ -17,7 +17,7 @@ data class Ability(
     val slot: Int
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
+        parcel.readString()!!,
         parcel.readString(),
         parcel.readByte() != 0.toByte(),
         parcel.readInt()

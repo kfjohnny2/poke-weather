@@ -24,6 +24,14 @@
             app:glideSrc="@{detailsViewModel.pokemonData.sprites.frontDefault}"
             android:src="@mipmap/ic_launcher"/>
 
+        <CheckBox
+            android:id="@+id/cbFav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="?android:attr/starStyle"/>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clPokemonDetailsContent"
             android:layout_width="match_parent"
@@ -68,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:textAllCaps="true"
                     android:textColor="#B8B8B8"
-                    android:text="Weight"
+                    android:text="@string/details_weight_label"
                     android:textSize="12sp"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -99,7 +107,7 @@
                     android:textAllCaps="true"
                     android:textColor="#B8B8B8"
                     android:textSize="12sp"
-                    android:text="Type"
+                    android:text="@string/details_type_label"
                     android:textStyle="bold"/>
             </LinearLayout>
             <LinearLayout
@@ -125,10 +133,31 @@
                     android:layout_height="wrap_content"
                     android:textAllCaps="true"
                     android:textColor="#B8B8B8"
-                    android:text="Height"
+                    android:text="@string/details_height_label"
                     android:textSize="12sp"
                     android:textStyle="bold"/>
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtMovesLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/details_moves_label"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/default_vertical_margin"
+                android:layout_marginStart="@dimen/default_horizontal_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/llPokemonWeight"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMoves"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:adapter="@{detailsViewModel.pokemonData.moves}"
+                android:layout_marginTop="@dimen/default_vertical_margin"
+                android:layout_marginStart="@dimen/default_horizontal_margin"
+                app:layout_constraintTop_toBottomOf="@id/txtMovesLabel"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

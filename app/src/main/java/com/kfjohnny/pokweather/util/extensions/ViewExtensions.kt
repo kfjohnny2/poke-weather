@@ -1,4 +1,4 @@
-package com.kfjohnny.pokweather.util
+package com.kfjohnny.pokweather.util.extensions
 
 import android.content.ContextWrapper
 import androidx.appcompat.app.AppCompatActivity
