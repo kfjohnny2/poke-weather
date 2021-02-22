@@ -8,11 +8,11 @@ import com.kfjohnny.pokweather.util.URL_FIELD
 
 data class Move(
 
-    @SerializedName(NAME_FIELD) val moveName: String?,
+    @SerializedName(NAME_FIELD) val moveName: String,
     @SerializedName(URL_FIELD) val moveUrl: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
+        parcel.readString()!!,
         parcel.readString()
     ) {
     }

@@ -1,8 +1,6 @@
 package com.kfjohnny.pokweather.ui.description
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kfjohnny.pokweather.R
 import com.kfjohnny.pokweather.base.BaseFragment
 import com.kfjohnny.pokweather.databinding.FragmentDetailsBinding
-import com.kfjohnny.pokweather.ui.description.adapter.AbilitiesAdapter
-import com.kfjohnny.pokweather.ui.main.MainViewModel
+import com.kfjohnny.pokweather.ui.description.adapter.MovesAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
@@ -39,8 +36,8 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
     }
 
     private fun configuraRecyclerView() {
-        binding.rvAbilities.adapter = AbilitiesAdapter(mutableListOf())
-        with(binding.rvAbilities) {
+        binding.rvMoves.adapter = MovesAdapter(mutableListOf())
+        with(binding.rvMoves) {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
         }
