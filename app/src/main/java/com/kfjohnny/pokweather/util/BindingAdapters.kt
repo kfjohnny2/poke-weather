@@ -11,6 +11,7 @@ import android.widget.*
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.kfjohnny.pokweather.util.extensions.getParentActivity
 import com.kfjohnny.pokweather.util.helpers.AdapterItemsContract
 
 @BindingAdapter("mutableVisibility")
