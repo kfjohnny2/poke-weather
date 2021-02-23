@@ -12,6 +12,8 @@ import androidx.navigation.findNavController
 import com.kfjohnny.pokweather.R
 import com.kfjohnny.pokweather.base.BaseFragment
 import com.kfjohnny.pokweather.databinding.FragmentMainBinding
+import com.kfjohnny.pokweather.ui.description.adapter.MovesAdapter
+import com.kfjohnny.pokweather.ui.main.adapter.PokemonListAdapter
 import com.kfjohnny.pokweather.util.extensions.hideKeyboard
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -38,6 +40,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         binding.imgPokemonPic.setOnClickListener {
             navigateToDetails()
         }
+
         return binding.root
     }
 
@@ -53,6 +56,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         mainViewModel.pokemonData.observe(viewLifecycleOwner, Observer {
             hideKeyboard()
         })
+        mainViewModel.pokemonsData.observe(viewLifecycleOwner, Observer {
+            configuraRecyclerView()
+        })
         // Observe showLoading value and display or hide our activity's progressBar
         mainViewModel.showLoading.observe(viewLifecycleOwner, Observer { showLoading ->
             //mainProgressBar.visibility = if (showLoading!!) View.VISIBLE else View.GONE
@@ -62,5 +68,13 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             Toast.makeText(context, showError, Toast.LENGTH_SHORT).show()
         })
         // The observers are set, we can now ask API to load a data list
+    }
+
+    private fun configuraRecyclerView() {
+        binding.rvPokemons.adapter = PokemonListAdapter(mutableListOf())
+        with(binding.rvPokemons) {
+            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+            setHasFixedSize(true)
+        }
     }
 }
