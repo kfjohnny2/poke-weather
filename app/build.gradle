@@ -108,6 +108,8 @@ dependencies {
     implementation "org.koin:koin-android:2.0.0"
     implementation 'org.koin:koin-android-viewmodel:2.0.0'
 
+    // Palette
+    implementation 'androidx.palette:palette-ktx:1.0.0'
 
     //Tests
     testImplementation 'junit:junit:4.12'
