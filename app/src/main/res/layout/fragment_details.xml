@@ -6,8 +6,11 @@
         <variable
             name="detailsViewModel"
             type="com.kfjohnny.pokweather.ui.description.DetailsViewModel" />
+        <import type="com.kfjohnny.pokweather.util.extensions.StringExtensionsKt"/>
+
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cvBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.description.DetailsFragment"
@@ -45,7 +48,7 @@
                 android:id="@+id/txtPokemonName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{detailsViewModel.pokemonData.pokemonName}"
+                android:text="@{StringExtensionsKt.upperCaseFirstCharacter(detailsViewModel.pokemonData.pokemonName)}"
                 android:textSize="@dimen/main_pokemon_title_size"
                 android:textStyle="bold"
                 android:layout_marginTop="@dimen/default_vertical_margin"
@@ -97,7 +100,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:text="@{detailsViewModel.pokemonData.types.get(0).type.typeName}"
+                    android:text="@{StringExtensionsKt.upperCaseFirstCharacter(detailsViewModel.pokemonData.types.get(0).type.typeName)}"
                     android:src="@drawable/ic_search"
                     android:textStyle="bold"/>
                 <TextView
