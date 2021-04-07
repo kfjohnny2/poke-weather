@@ -12,6 +12,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.palette.graphics.Palette
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -19,6 +21,8 @@ import com.kfjohnny.pokweather.R
 import com.kfjohnny.pokweather.base.BaseFragment
 import com.kfjohnny.pokweather.databinding.FragmentMainBinding
 import com.kfjohnny.pokweather.model.pokemon.Pokemon
+import com.kfjohnny.pokweather.ui.description.adapter.MovesAdapter
+import com.kfjohnny.pokweather.ui.main.adapter.PokemonGridAdapter
 import com.kfjohnny.pokweather.util.changeDynamicBackgroundColor
 import com.kfjohnny.pokweather.util.extensions.hideKeyboard
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -46,6 +50,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         binding.imgPokemonPic.setOnClickListener {
             navigateToDetails()
         }
+        configuraRecyclerView()
+
         return binding.root
     }
 
@@ -63,6 +69,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             //Changing background color dynamically by the pokemon dominant color
             activity?.let { it1 -> changeDynamicBackgroundColor(it, it1) }
         })
+
         // Observe showLoading value and display or hide our activity's progressBar
         mainViewModel.showLoading.observe(viewLifecycleOwner, Observer { showLoading ->
             //mainProgressBar.visibility = if (showLoading!!) View.VISIBLE else View.GONE
@@ -72,5 +79,13 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             Toast.makeText(context, showError, Toast.LENGTH_SHORT).show()
         })
         // The observers are set, we can now ask API to load a data list
+    }
+
+    private fun configuraRecyclerView() {
+        binding.rvPokemons.adapter = PokemonGridAdapter(mutableListOf())
+        with(binding.rvPokemons) {
+            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
+        }
     }
 }

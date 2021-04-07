@@ -33,11 +33,11 @@ class MainViewModel(private val pokemonRepository: PokemonRepository) : BaseView
                 is UseCaseResult.Success -> {
                     pokemonsData.value = result.data
                     withContext(Dispatchers.IO){pokemonRepository.insertPokemons(result.data.results)}
-                    Log.d("DATA", result.data.results.toString())
+                    Log.d("DATA POKEMONS: ", result.data.results.toString())
                 }
                 is UseCaseResult.Error -> {
                     showError.value = result.exception.message
-                    Log.d("ERROR", result.exception.message!!)
+                    Log.d("ERROR POKEMONS: ", result.exception.message!!)
                 }
             }
         }
