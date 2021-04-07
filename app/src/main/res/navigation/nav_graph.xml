@@ -10,7 +10,7 @@
         android:name="com.kfjohnny.pokweather.ui.main.MainFragment"
         android:label="Home">
         <action
-            android:id="@+id/action_mainFragment_to_detailsFragment"
+            android:id="@+id/goToDetailsFragment"
             app:destination="@id/detailsFragment" />
     </fragment>
     <fragment
@@ -19,7 +19,8 @@
         android:label="Details"
         tools:layout="@layout/fragment_details" >
         <argument
-            android:name="pokemon"
-            app:argType="com.kfjohnny.pokweather.model.pokemon.Pokemon" />
+            android:name="pokemonId"
+            app:argType="string"
+            android:defaultValue='""' />
     </fragment>
 </navigation>

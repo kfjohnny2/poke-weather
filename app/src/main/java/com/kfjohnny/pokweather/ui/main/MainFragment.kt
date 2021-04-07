@@ -48,20 +48,17 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
         binding.mainViewModel = mainViewModel
 
-
         binding.imgPokemonPic.setOnClickListener {
-            navigateToDetails()
+            //navigateToDetails()
         }
 
         return binding.root
     }
 
-    private fun navigateToDetails(){
-        val pokemon = mainViewModel.pokemonData.value
-        if(pokemon != null) {
-            val directions = MainFragmentDirections.actionMainFragmentToDetailsFragment(pokemon)
-            binding.root.findNavController().navigate(directions)
-        }
+    private fun navigateToDetails(pokemonId: String) {
+        val directions = MainFragmentDirections.goToDetailsFragment()
+        directions.pokemonId = pokemonId
+        binding.root.findNavController().navigate(directions)
     }
 
     private fun initViewModel() {
@@ -86,7 +83,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
     }
 
     private fun configuraRecyclerView(list: List<PokemonSample>) {
-        binding.rvPokemons.adapter = PokemonGridAdapter(list.toMutableList())
+        binding.rvPokemons.adapter = PokemonGridAdapter(list.toMutableList()) { pokemonId: String ->
+            navigateToDetails(pokemonId)
+        }
         with(binding.rvPokemons) {
             layoutManager = GridLayoutManager(context, 2)
             setHasFixedSize(true)

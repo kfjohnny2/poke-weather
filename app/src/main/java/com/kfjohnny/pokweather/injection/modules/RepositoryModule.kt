@@ -17,7 +17,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-
+const val POKEMON_REPOSITORY = "pokemonRepository"
 val repositoryModules = module {
     single {
         createWebService<PokemonApi>()
@@ -29,14 +29,14 @@ val repositoryModules = module {
 
     single { get<PokemonWeatherDatabase>().pokemonSampleDao() }
 
-    single<PokemonRepository>(named("pokemonRepository")) {
+    single<PokemonRepository>(named(POKEMON_REPOSITORY)) {
         PokemonRepositoryImpl(
             pokemonApi = get(),
             pokemonSampleDAO = get()
         )
     }
-    viewModel { MainViewModel(get(named("pokemonRepository"))) }
-    viewModel { DetailsViewModel() }
+    viewModel { MainViewModel(get(named(POKEMON_REPOSITORY))) }
+    viewModel { DetailsViewModel(get(named(POKEMON_REPOSITORY))) }
 }
 
 /* Returns a custom OkHttpClient instance with interceptor. Used for building Retrofit service */
