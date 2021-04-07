@@ -167,7 +167,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_horizontal_margin"
                 android:layout_marginTop="@dimen/default_vertical_margin"
-                app:adapter="@{detailsViewModel.pokemonData.moves}"
                 app:layout_constraintTop_toBottomOf="@id/txtMovesLabel" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

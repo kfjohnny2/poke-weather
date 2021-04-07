@@ -23,8 +23,8 @@
             android:drawableStart="@drawable/ic_search"
             android:drawableLeft="@drawable/ic_search"
             android:drawablePadding="10dp"
-            android:imeOptions="actionSearch"
-            app:onImeOption="@{()->mainViewModel.loadPokemon(edSearchPokemon.getText().toString())}"/>
+            android:imeOptions="actionSearch"/>
+            <!--app:onImeOption="@{()->mainViewModel.loadPokemon(edSearchPokemon.getText().toString())}"/>-->
 
         <TextView
             android:id="@+id/txtPokemonName"
@@ -40,11 +40,19 @@
             android:id="@+id/imgPokemonPic"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:glideSrc="@{@string/image_resource_api_base_url + mainViewModel.pokemonData.pokemonId+ `.png`}"
+            android:visibility="gone"
+            app:glideSrc="@{@string/image_resource_api_base_url + mainViewModel.pokemonData.pokemonId+ @string/image_resource_png_extension_type}"
             app:layout_constraintTop_toBottomOf="@id/txtPokemonName"
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPokemons"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            tools:listitem="@layout/item_pokemon_grid"
+            app:layout_constraintTop_toBottomOf="@id/txtPokemonName"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
