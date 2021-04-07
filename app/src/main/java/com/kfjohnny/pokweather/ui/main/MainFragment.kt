@@ -21,6 +21,7 @@ import com.kfjohnny.pokweather.R
 import com.kfjohnny.pokweather.base.BaseFragment
 import com.kfjohnny.pokweather.databinding.FragmentMainBinding
 import com.kfjohnny.pokweather.model.pokemon.Pokemon
+import com.kfjohnny.pokweather.model.search.PokemonSample
 import com.kfjohnny.pokweather.ui.description.adapter.MovesAdapter
 import com.kfjohnny.pokweather.ui.main.adapter.PokemonGridAdapter
 import com.kfjohnny.pokweather.util.changeDynamicBackgroundColor
@@ -47,10 +48,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
         binding.mainViewModel = mainViewModel
 
+
         binding.imgPokemonPic.setOnClickListener {
             navigateToDetails()
         }
-        configuraRecyclerView()
 
         return binding.root
     }
@@ -70,6 +71,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             activity?.let { it1 -> changeDynamicBackgroundColor(it, it1) }
         })
 
+        mainViewModel.pokemonsData.observe(viewLifecycleOwner, Observer {
+            configuraRecyclerView(it.results)
+        })
         // Observe showLoading value and display or hide our activity's progressBar
         mainViewModel.showLoading.observe(viewLifecycleOwner, Observer { showLoading ->
             //mainProgressBar.visibility = if (showLoading!!) View.VISIBLE else View.GONE
@@ -81,10 +85,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         // The observers are set, we can now ask API to load a data list
     }
 
-    private fun configuraRecyclerView() {
-        binding.rvPokemons.adapter = PokemonGridAdapter(mutableListOf())
+    private fun configuraRecyclerView(list: List<PokemonSample>) {
+        binding.rvPokemons.adapter = PokemonGridAdapter(list.toMutableList())
         with(binding.rvPokemons) {
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = GridLayoutManager(context, 2)
             setHasFixedSize(true)
         }
     }

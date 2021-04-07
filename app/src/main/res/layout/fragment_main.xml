@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:visibility="gone"
-            app:glideSrc="@{@string/image_resource_api_base_url + mainViewModel.pokemonData.pokemonId+ `.png`}"
+            app:glideSrc="@{@string/image_resource_api_base_url + mainViewModel.pokemonData.pokemonId+ @string/image_resource_png_extension_type}"
             app:layout_constraintTop_toBottomOf="@id/txtPokemonName"
             app:layout_constraintBottom_toBottomOf="parent"
             />
@@ -50,7 +50,7 @@
             android:id="@+id/rvPokemons"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:adapter="@{mainViewModel.pokemonsData.results}"
+            tools:listitem="@layout/item_pokemon_grid"
             app:layout_constraintTop_toBottomOf="@id/txtPokemonName"
             app:layout_constraintBottom_toBottomOf="parent"/>
 

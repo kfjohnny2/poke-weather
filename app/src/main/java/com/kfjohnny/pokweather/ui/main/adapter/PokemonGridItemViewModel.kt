@@ -12,7 +12,7 @@ class PokemonGridItemViewModel : BaseViewModel() {
     private val pokemonId = MutableLiveData<String>()
 
     fun bind(pokemon: PokemonSample){
-        pokemonId.postValue(getPokemonIdFromUrl(pokemon))
+        pokemonId.value = getPokemonIdFromUrl(pokemon)
     }
 
     private fun getPokemonIdFromUrl(pokemon: PokemonSample): String {

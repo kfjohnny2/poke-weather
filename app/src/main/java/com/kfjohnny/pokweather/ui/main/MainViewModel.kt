@@ -21,7 +21,7 @@ class MainViewModel(private val pokemonRepository: PokemonRepository) : BaseView
         loadPokemons()
     }
 
-    fun loadPokemons(){
+    private fun loadPokemons(){
         showLoading.value = true
 
         launch {
