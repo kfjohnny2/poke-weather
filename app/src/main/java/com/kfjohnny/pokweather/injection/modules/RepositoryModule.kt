@@ -12,6 +12,7 @@ import com.kfjohnny.pokweather.ui.main.repository.PokemonRepository
 import com.kfjohnny.pokweather.ui.main.repository.PokemonRepositoryImpl
 import okhttp3.OkHttpClient
 import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -28,13 +29,13 @@ val repositoryModules = module {
 
     single { get<PokemonWeatherDatabase>().pokemonSampleDao() }
 
-    single<PokemonRepository> {
+    single<PokemonRepository>(named("pokemonRepository")) {
         PokemonRepositoryImpl(
             pokemonApi = get(),
             pokemonSampleDAO = get()
         )
     }
-    viewModel { MainViewModel(pokemonRepository = get()) }
+    viewModel { MainViewModel(get(named("pokemonRepository"))) }
     viewModel { DetailsViewModel() }
 }
 
