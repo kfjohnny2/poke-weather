@@ -13,7 +13,7 @@ import com.kfjohnny.pokweather.ui.main.repository.PokemonRepository
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-class MainViewModel(val pokemonRepository: PokemonRepository) : BaseViewModel() {
+class MainViewModel(private val pokemonRepository: PokemonRepository) : BaseViewModel() {
     val pokemonData = MutableLiveData<Pokemon>()
     val pokemonsData = MutableLiveData<SearchResult>()
 
