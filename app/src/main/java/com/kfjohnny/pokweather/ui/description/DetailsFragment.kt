@@ -1,19 +1,12 @@
 package com.kfjohnny.pokweather.ui.description
 
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
-import androidx.palette.graphics.Palette
-import androidx.palette.graphics.Palette.Swatch
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
 import com.kfjohnny.pokweather.R
 import com.kfjohnny.pokweather.base.BaseFragment
 import com.kfjohnny.pokweather.databinding.FragmentDetailsBinding

@@ -22,4 +22,18 @@ interface PokemonSampleDAO{
      */
     @Query("SELECT * FROM pokemon_sample WHERE pokemonName = :name")
     fun findPokemonByName(name: String): PokemonSample
+
+    /**
+     * Search first pokemon on database (only for checking if there's data)
+     * @return PokemonSample First pokemon
+     */
+    @Query("SELECT * FROM pokemon_sample LIMIT 1")
+    fun findFirst(): PokemonSample
+
+    /**
+     * Search first pokemon on database (only for checking if there's data)
+     * @return PokemonSample First pokemon
+     */
+    @Query("SELECT * FROM pokemon_sample LIMIT 100")
+    fun getPokemonsLocal(): List<PokemonSample>
 }
