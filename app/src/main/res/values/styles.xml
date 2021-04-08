@@ -15,4 +15,13 @@
         <item name="android:textColorSecondary">#EEEEEE</item>
 
     </style>
+
+    <style name="FiltersToggle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@drawable/toggle_text_color</item>
+        <item name="android:background">@drawable/bg_toggle_button_filters</item>
+    </style>
 </resources>

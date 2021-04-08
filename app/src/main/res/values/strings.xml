@@ -1,8 +1,14 @@
 <resources>
+
+
     <string name="app_name">PokéWeather</string>
     <string name="main_pokemon_name_or_id_hint">Pokémon name or id</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Image Resource API Strings-->
+    <string name="image_resource_api_base_url">https://pokeres.bastionbot.org/images/pokemon/</string>
+    <string name="image_resource_png_extension_type">.png</string>
+
+    <!-- Details Fragment Strings -->
     <string name="details_moves_label">Moves</string>
     <string name="details_height_label">Height</string>
     <string name="details_type_label">Type</string>
