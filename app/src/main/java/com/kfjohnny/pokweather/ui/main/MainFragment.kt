@@ -68,8 +68,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             activity?.let { it1 -> changeDynamicBackgroundColor(it, it1) }
         })
 
-        mainViewModel.pokemonsData.observe(viewLifecycleOwner, Observer {
-            configuraRecyclerView(it.results)
+        mainViewModel.pokemonList.observe(viewLifecycleOwner, Observer {
+            configuraRecyclerView(it)
         })
         // Observe showLoading value and display or hide our activity's progressBar
         mainViewModel.showLoading.observe(viewLifecycleOwner, Observer { showLoading ->

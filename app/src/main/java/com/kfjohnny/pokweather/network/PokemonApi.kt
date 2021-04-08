@@ -6,6 +6,7 @@ import com.kfjohnny.pokweather.util.ID_FIELD
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface PokemonApi {
     /**
@@ -13,6 +14,11 @@ interface PokemonApi {
      */
     @GET("pokemon/")
     suspend fun getPokemons() : Response<SearchResult>
+    /**
+     * Get the list of pokemons from the API
+     */
+    @GET("pokemon/")
+    suspend fun getPokemons(@Query("limit") limit : Int) : Response<SearchResult>
 
     /**
      * Get the pokemon from the API
