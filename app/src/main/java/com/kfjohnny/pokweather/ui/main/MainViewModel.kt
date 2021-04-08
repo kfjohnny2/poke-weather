@@ -88,4 +88,25 @@ class MainViewModel(private val pokemonRepository: PokemonRepository) : BaseView
             }
         }
     }
+
+    fun findPokemons(pokemonSearch: String){
+        val pokemonSearch = pokemonSearch
+        if (pokemonSearch.isEmpty()){
+            loadPokemons()
+            return
+        }
+        showLoading.value = true
+        launch {
+
+            when(val localPokemon = withContext(Dispatchers.IO){pokemonRepository.findPokemonByName(pokemonSearch)}){
+                is UseCaseResult.Success ->{
+
+                    pokemonList.value = localPokemon.data
+                }
+                is UseCaseResult.Error ->{
+                    Log.d("ERROR POKEMONS: ", "No Pokemons")
+                }
+            }
+        }
+    }
 }

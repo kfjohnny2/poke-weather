@@ -24,6 +24,14 @@ interface PokemonSampleDAO{
     fun findPokemonByName(name: String): PokemonSample
 
     /**
+     * Search Pokemon Sample for the given name
+     * @param sentence Name (or part of) of the Pokemon
+     * @return PokemonSample Pokemon Name and Url object
+     */
+    @Query("SELECT * FROM pokemon_sample where pokemonName like '%' || :sentence || '%'")
+    fun findPokemonByNameOrID(sentence: String): List<PokemonSample>
+
+    /**
      * Search first pokemon on database (only for checking if there's data)
      * @return PokemonSample First pokemon
      */

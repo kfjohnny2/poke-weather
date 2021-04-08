@@ -23,8 +23,9 @@
             android:drawableStart="@drawable/ic_search"
             android:drawableLeft="@drawable/ic_search"
             android:drawablePadding="10dp"
+            app:onImeOption="@{()->mainViewModel.findPokemons(edSearchPokemon.getText().toString().trim())}"
             android:imeOptions="actionSearch"/>
-            <!--app:onImeOption="@{()->mainViewModel.loadPokemon(edSearchPokemon.getText().toString())}"/>-->
+            <!--"/>-->
 
         <TextView
             android:id="@+id/txtPokemonName"
