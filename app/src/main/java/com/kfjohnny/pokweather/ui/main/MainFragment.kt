@@ -63,7 +63,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     private fun initViewModel() {
         mainViewModel.pokemonData.observe(viewLifecycleOwner, Observer {
-            hideKeyboard()
             //Changing background color dynamically by the pokemon dominant color
             activity?.let { it1 -> changeDynamicBackgroundColor(it, it1) }
         })

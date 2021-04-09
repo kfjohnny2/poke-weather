@@ -19,7 +19,7 @@ class PokemonRepositoryImpl(val pokemonApi: PokemonApi, val pokemonSampleDAO: Po
             if (result.isNotEmpty()) {
                 UseCaseResult.Success(result)
             } else {
-                UseCaseResult.Error(Throwable())
+                UseCaseResult.Empty()
             }
         } catch (ex: Exception) {
             UseCaseResult.Error(ex)
@@ -32,7 +32,7 @@ class PokemonRepositoryImpl(val pokemonApi: PokemonApi, val pokemonSampleDAO: Po
             if (result.isNotEmpty()){
                 UseCaseResult.Success(result)
             } else{
-                UseCaseResult.Error(Throwable("NO RESULTS FOUND"))
+                UseCaseResult.Empty()
             }
         } catch (ex: Exception){
             UseCaseResult.Error(ex)
