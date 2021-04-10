@@ -25,10 +25,10 @@ interface PokemonSampleDAO{
 
     /**
      * Search Pokemon Sample for the given name
-     * @param sentence Name (or part of) of the Pokemon
+     * @param sentence Name (or part of) of the Pokemon or straight by the ID (example: sentence = 25, returns Pikachu)
      * @return PokemonSample Pokemon Name and Url object
      */
-    @Query("SELECT * FROM pokemon_sample where pokemonName like '%' || :sentence || '%'")
+    @Query("SELECT * FROM pokemon_sample where pokemonName like '%' || :sentence || '%'or `replace`(substr(pokemonUrl,35), '/', '') = :sentence")
     fun findPokemonByNameOrID(sentence: String): List<PokemonSample>
 
     /**

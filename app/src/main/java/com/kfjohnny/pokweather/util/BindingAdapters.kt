@@ -11,6 +11,7 @@ import android.widget.*
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.kfjohnny.pokweather.util.extensions.getParentActivity
 import com.kfjohnny.pokweather.util.helpers.AdapterItemsContract
 
@@ -58,7 +59,7 @@ fun setOnImeOption(view: EditText, func: Runnable) {
         return@setOnEditorActionListener when (actionId) {
             EditorInfo.IME_ACTION_SEARCH -> {
                 func.run()
-                false
+                true
             }
             else -> false
         }
@@ -69,7 +70,7 @@ fun setOnImeOption(view: EditText, func: Runnable) {
 fun setGlideSrc(view: ImageView, text: String?) {
     val parentActivity: AppCompatActivity? = view.getParentActivity()
     if (parentActivity != null && text != null) {
-        Glide.with(view.context).load(text).into(view)
+        Glide.with(view.context).load(text).diskCacheStrategy(DiskCacheStrategy.DATA).into(view)
     }
 }
 
