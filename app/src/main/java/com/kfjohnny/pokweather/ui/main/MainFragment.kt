@@ -3,7 +3,6 @@ package com.kfjohnny.pokweather.ui.main
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,6 +13,8 @@ import com.kfjohnny.pokweather.model.search.PokemonSample
 import com.kfjohnny.pokweather.ui.main.adapter.PokemonGridAdapter
 import com.kfjohnny.pokweather.util.changeDynamicToolbarBackgroundColor
 import org.koin.android.viewmodel.ext.android.viewModel
+
+const val GRID_VIEW_SPAN_LIMIT = 2
 
 /**
  * @author Johnnylee Rocha (kfjohnny2) 15/02/2021
@@ -31,15 +32,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         savedInstanceState: Bundle?
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
-        // Inflate the layout for this fragment
 
-        initViewModel()
+        // Start observers
+        initObservers()
 
         binding.mainViewModel = mainViewModel
-
-        binding.imgPokemonPic.setOnClickListener {
-            //navigateToDetails()
-        }
 
         return binding.root
     }
@@ -50,7 +47,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         binding.root.findNavController().navigate(directions)
     }
 
-    private fun initViewModel() {
+    /**
+     * Function for starting viewModel LiveData Observers functions
+     *
+     */
+    private fun initObservers() {
         mainViewModel.pokemonData.observe(viewLifecycleOwner, Observer {
             //Changing background color dynamically by the pokemon dominant color
             activity?.let { it1 -> changeDynamicToolbarBackgroundColor(it, it1) }
@@ -75,7 +76,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             navigateToDetails(pokemonId)
         }
         with(binding.rvPokemons) {
-            layoutManager = GridLayoutManager(context, 2)
+            layoutManager = GridLayoutManager(context, GRID_VIEW_SPAN_LIMIT)
             setHasFixedSize(true)
         }
     }

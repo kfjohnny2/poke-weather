@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.kfjohnny.pokweather.util.extensions.getParentActivity
+import com.kfjohnny.pokweather.util.extensions.onSearchTextChanged
 import com.kfjohnny.pokweather.util.helpers.AdapterItemsContract
 
 @BindingAdapter("mutableVisibility")
@@ -66,6 +67,25 @@ fun setOnImeOption(view: EditText, func: Runnable) {
     }
 }
 
+/**
+ * Binding function: Add textwatcher funcion on textChanged extension method
+ *
+ * @param view  EditText to add extension function
+ * @param func  Function to run on textwatcher callback
+ */
+@BindingAdapter("addTextWatcherFunc")
+fun setTextWatcher(view: EditText, func: Runnable) {
+    view.onSearchTextChanged {
+        func.run()
+    }
+}
+
+/**
+ * Binding function: Loading image url with glide library into image view
+ *
+ * @param view  ImageView to apply image
+ * @param text  Image URL for loading src
+ */
 @BindingAdapter("glideSrc")
 fun setGlideSrc(view: ImageView, text: String?) {
     val parentActivity: AppCompatActivity? = view.getParentActivity()
@@ -74,6 +94,12 @@ fun setGlideSrc(view: ImageView, text: String?) {
     }
 }
 
+/**
+ * Binding function: Items for replacing items into adapter
+ *
+ * @param recyclerView  RecyclerView to apply new items
+ * @param items Items for replacing on recycler view adapter
+ */
 @BindingAdapter("adapter")
 fun setAdapter(recyclerView: RecyclerView, items: List<Any>) {
     recyclerView.adapter.let {
