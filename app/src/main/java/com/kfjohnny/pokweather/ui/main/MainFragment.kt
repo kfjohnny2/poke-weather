@@ -1,35 +1,25 @@
 package com.kfjohnny.pokweather.ui.main
 
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
 import com.kfjohnny.pokweather.R
 import com.kfjohnny.pokweather.base.BaseFragment
 import com.kfjohnny.pokweather.databinding.FragmentMainBinding
-import com.kfjohnny.pokweather.model.pokemon.Pokemon
 import com.kfjohnny.pokweather.model.search.PokemonSample
-import com.kfjohnny.pokweather.ui.description.adapter.MovesAdapter
 import com.kfjohnny.pokweather.ui.main.adapter.PokemonGridAdapter
-import com.kfjohnny.pokweather.util.changeDynamicBackgroundColor
-import com.kfjohnny.pokweather.util.extensions.hideKeyboard
+import com.kfjohnny.pokweather.util.changeDynamicToolbarBackgroundColor
 import org.koin.android.viewmodel.ext.android.viewModel
 
+const val GRID_VIEW_SPAN_LIMIT = 2
+
 /**
- * A simple [Fragment] subclass.
+ * @author Johnnylee Rocha (kfjohnny2) 15/02/2021
+ *
+ * [MainFragment] subclass for listing and searching pokemons.
  */
 class MainFragment : BaseFragment<FragmentMainBinding>() {
 
@@ -40,17 +30,13 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         super.onCreateView(inflater, container, savedInstanceState)
-        // Inflate the layout for this fragment
 
-        initViewModel()
+        // Start observers
+        initObservers()
 
         binding.mainViewModel = mainViewModel
-
-        binding.imgPokemonPic.setOnClickListener {
-            //navigateToDetails()
-        }
 
         return binding.root
     }
@@ -61,11 +47,14 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         binding.root.findNavController().navigate(directions)
     }
 
-    private fun initViewModel() {
+    /**
+     * Function for starting viewModel LiveData Observers functions
+     *
+     */
+    private fun initObservers() {
         mainViewModel.pokemonData.observe(viewLifecycleOwner, Observer {
-            hideKeyboard()
             //Changing background color dynamically by the pokemon dominant color
-            activity?.let { it1 -> changeDynamicBackgroundColor(it, it1) }
+            activity?.let { it1 -> changeDynamicToolbarBackgroundColor(it, it1) }
         })
 
         mainViewModel.pokemonList.observe(viewLifecycleOwner, Observer {
@@ -87,7 +76,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             navigateToDetails(pokemonId)
         }
         with(binding.rvPokemons) {
-            layoutManager = GridLayoutManager(context, 2)
+            layoutManager = GridLayoutManager(context, GRID_VIEW_SPAN_LIMIT)
             setHasFixedSize(true)
         }
     }

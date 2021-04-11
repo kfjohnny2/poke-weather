@@ -11,20 +11,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.main.MainFragment">
+        tools:context=".ui.main.MainFragment"
+        android:padding="@dimen/default_padding_size">
 
         <EditText
             android:id="@+id/edSearchPokemon"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:singleLine="true"
-            android:hint="@string/main_pokemon_name_or_id_hint"
+            android:hint="@string/main_pokemon_search_hint"
             android:drawableStart="@drawable/ic_search"
-            android:drawableLeft="@drawable/ic_search"
-            android:drawablePadding="10dp"
+            app:addTextWatcherFunc="@{()->mainViewModel.findPokemons(edSearchPokemon.getText().toString().trim())}"
             android:imeOptions="actionSearch"/>
-            <!--app:onImeOption="@{()->mainViewModel.loadPokemon(edSearchPokemon.getText().toString())}"/>-->
 
         <TextView
             android:id="@+id/txtPokemonName"
