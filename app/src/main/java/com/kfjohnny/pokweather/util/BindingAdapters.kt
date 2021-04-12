@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.*
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -79,6 +80,19 @@ fun setTextWatcher(view: EditText, func: Runnable) {
         func.run()
     }
 }
+
+/**
+ * Binding function: Add textwatcher funcion on textChanged extension method
+ *
+ * @param view  EditText to add extension function
+ * @param func  Function to run on textwatcher callback
+ */
+@BindingAdapter("addOnTextChanged")
+fun setOnTextChanged(view: EditText, func: Runnable) {
+    view.onSearchTextChanged {
+        func.run()
+    }
+} 
 
 /**
  * Binding function: Loading image url with glide library into image view

@@ -1,7 +1,9 @@
 package com.kfjohnny.pokweather.ui.main
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
@@ -14,6 +16,7 @@ import com.kfjohnny.pokweather.ui.main.adapter.PokemonGridAdapter
 import com.kfjohnny.pokweather.util.changeDynamicToolbarBackgroundColor
 import org.koin.android.viewmodel.ext.android.viewModel
 
+/* -- Constant Values --*/
 const val GRID_VIEW_SPAN_LIMIT = 2
 
 /**
@@ -80,4 +83,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             setHasFixedSize(true)
         }
     }
+
+
 }

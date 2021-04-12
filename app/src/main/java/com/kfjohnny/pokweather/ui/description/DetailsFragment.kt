@@ -26,7 +26,7 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
 
     private val detailsViewModel by viewModel<DetailsViewModel>()
 
-    val args: DetailsFragmentArgs by navArgs()
+    private val args: DetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
