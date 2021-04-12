@@ -10,6 +10,7 @@
     <!-- Main Fragment Strings -->
     <string name="main_pokemon_name_or_id_hint">Pokémon name or id</string>
     <string name="main_pokemon_search_hint">Search</string>
+    <string name="main_pokemon_avatar_grid_item_content_description">Pokémon Avatar</string>
 
     <!-- Details Fragment Strings -->
     <string name="details_moves_label">Moves</string>
