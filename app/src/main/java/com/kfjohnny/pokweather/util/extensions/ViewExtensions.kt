@@ -2,11 +2,15 @@ package com.kfjohnny.pokweather.util.extensions
 
 import android.content.ContextWrapper
 import android.view.View
+import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 
-fun View.getParentActivity(): AppCompatActivity?{
+/**
+ * Extension function for retrieving parentActivity from a view
+ */
+fun View.getParentActivity(): AppCompatActivity? {
     var context = this.context
     while (context is ContextWrapper) {
         if (context is AppCompatActivity) {
@@ -17,9 +21,20 @@ fun View.getParentActivity(): AppCompatActivity?{
     return null
 }
 
-fun View.setBackgroundColorFromId( colorId : Int) {
+/**
+ * Extension function for setup background color of a view using only @ColorRes Id
+ *
+ * @param colorId @ColorRes Id
+ */
+fun View.setBackgroundColorFromId(@ColorRes colorId: Int) {
     this.setBackgroundColor(ContextCompat.getColor(this.context, colorId))
 }
-fun Toolbar.setTitleTextColorFromId( colorId : Int) {
+
+/**
+ * Extension function for setting up toolbar text color using only @ColorRes Id
+ *
+ * @param colorId @ColorRes Id
+ */
+fun Toolbar.setTitleTextColorFromId(@ColorRes colorId: Int) {
     this.setTitleTextColor(ContextCompat.getColor(this.context, colorId))
 }
