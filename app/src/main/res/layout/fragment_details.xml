@@ -22,7 +22,7 @@
         tools:context=".ui.description.DetailsFragment">
 
         <ImageView
-            android:id="@+id/vpPokemonImages"
+            android:id="@+id/ivPokemonImages"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:src="@mipmap/ic_launcher"
@@ -45,7 +45,7 @@
             android:layout_marginTop="@dimen/default_vertical_margin"
             android:background="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/vpPokemonImages">
+            app:layout_constraintTop_toBottomOf="@id/ivPokemonImages">
 
             <TextView
                 android:id="@+id/txtPokemonName"

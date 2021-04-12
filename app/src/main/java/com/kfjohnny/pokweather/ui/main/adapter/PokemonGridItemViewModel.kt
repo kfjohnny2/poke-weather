@@ -6,7 +6,7 @@ import com.kfjohnny.pokweather.base.BaseViewModel
 import com.kfjohnny.pokweather.model.search.PokemonSample
 import com.kfjohnny.pokweather.util.extensions.upperCaseFirstCharacter
 
-class PokemonGridItemViewModel : BaseViewModel() {
+open class PokemonGridItemViewModel : BaseViewModel() {
     private val pokemonId = MutableLiveData<String>()
     open val pokemonName = MutableLiveData<String>()
 

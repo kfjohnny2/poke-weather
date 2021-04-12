@@ -1,15 +1,11 @@
 package com.kfjohnny.pokweather.ui.main.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.kfjohnny.pokweather.R
 import com.kfjohnny.pokweather.databinding.ItemPokemonGridBinding
-import com.kfjohnny.pokweather.model.pokemon.Pokemon
 import com.kfjohnny.pokweather.model.search.PokemonSample
 import com.kfjohnny.pokweather.util.helpers.AdapterItemsContract
 

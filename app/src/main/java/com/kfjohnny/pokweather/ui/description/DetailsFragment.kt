@@ -28,10 +28,7 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
 
     private val args: DetailsFragmentArgs by navArgs()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
 
         val pokemonId = args.pokemonId
@@ -45,11 +42,9 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
     }
 
     private fun configureLiveData() {
-        detailsViewModel.pokemonData.observe(viewLifecycleOwner, Observer {
+        detailsViewModel.pokemonData.observe(viewLifecycleOwner, Observer {pokemon ->
             //Changing background color dynamically by the pokemon dominant color
-            activity?.let { it1 -> changeDynamicToolbarBackgroundColor(it, it1, binding.cvBackground) }
-
-            it.moves?.let { it1 -> configuraRecyclerView(it1) }
+            pokemon.moves?.let { listMoves -> configuraRecyclerView(listMoves) }
         })
     }
 

@@ -45,9 +45,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
     }
 
     private fun navigateToDetails(pokemonId: String) {
-        val directions = MainFragmentDirections.goToDetailsFragment()
-        directions.pokemonId = pokemonId
-        binding.root.findNavController().navigate(directions)
+        with(MainFragmentDirections.goToDetailsFragment()){
+            this.pokemonId = pokemonId
+            binding.root.findNavController().navigate(this)
+        }
     }
 
     /**
@@ -55,23 +56,25 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
      *
      */
     private fun initObservers() {
-        mainViewModel.pokemonData.observe(viewLifecycleOwner, Observer {
-            //Changing background color dynamically by the pokemon dominant color
-            activity?.let { it1 -> changeDynamicToolbarBackgroundColor(it, it1) }
-        })
+        with(mainViewModel){
+            pokemonData.observe(viewLifecycleOwner, Observer {
+                //Changing background color dynamically by the pokemon dominant color
+                activity?.let { it1 -> changeDynamicToolbarBackgroundColor(it, it1) }
+            })
+            pokemonList.observe(viewLifecycleOwner, Observer {
+                configuraRecyclerView(it)
+            })
+            // Observe showLoading value and display or hide our activity's progressBar
+            showLoading.observe(viewLifecycleOwner, Observer { showLoading ->
+                //mainProgressBar.visibility = if (showLoading!!) View.VISIBLE else View.GONE
+            })
 
-        mainViewModel.pokemonList.observe(viewLifecycleOwner, Observer {
-            configuraRecyclerView(it)
-        })
-        // Observe showLoading value and display or hide our activity's progressBar
-        mainViewModel.showLoading.observe(viewLifecycleOwner, Observer { showLoading ->
-            //mainProgressBar.visibility = if (showLoading!!) View.VISIBLE else View.GONE
-        })
-        // Observe showError value and display the error message as a Toast
-        mainViewModel.showError.observe(viewLifecycleOwner, Observer { showError ->
-            Toast.makeText(context, showError, Toast.LENGTH_SHORT).show()
-        })
-        // The observers are set, we can now ask API to load a data list
+            // Observe showError value and display the error message as a Toast
+            showError.observe(viewLifecycleOwner, Observer { showError ->
+                Toast.makeText(context, showError, Toast.LENGTH_SHORT).show()
+            })
+            // The observers are set, we can now ask API to load a data list
+        }
     }
 
     private fun configuraRecyclerView(list: List<PokemonSample>) {
