@@ -16,6 +16,12 @@ interface PokemonSampleDAO{
     fun saveAll(entities: List<PokemonSample>)
 
     /**
+     * Create a pokemon
+     */
+    @Insert
+    fun createPokemon(pokemon: PokemonSample)
+
+    /**
      * Search Pokemon Sample for the given name
      * @param name Name of the Pokemon
      * @return PokemonSample Pokemon Name and Url object
