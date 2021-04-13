@@ -9,12 +9,13 @@
             type="com.kfjohnny.pokweather.ui.main.adapter.PokemonGridItemViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
         android:background="?android:attr/selectableItemBackground"
-        android:padding="@dimen/default_padding_half_size">
+        android:padding="@dimen/default_grid_item_padding"
+        >
 
         <ImageView
             android:id="@+id/ivPokemonAvatar"
@@ -22,8 +23,10 @@
             android:layout_height="150dp"
             app:glideSrc="@{@string/image_resource_api_base_url + pokemonGridViewModel.getPokemonId() + @string/image_resource_png_extension_type}"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@mipmap/ic_launcher" />
+            tools:src="@mipmap/ic_launcher"
+            android:contentDescription="@string/main_pokemon_avatar_grid_item_content_description"/>
 
         <TextView
             android:id="@+id/tvPokemonName"

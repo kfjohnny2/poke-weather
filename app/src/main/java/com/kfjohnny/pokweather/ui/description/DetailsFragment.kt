@@ -12,7 +12,6 @@ import com.kfjohnny.pokweather.base.BaseFragment
 import com.kfjohnny.pokweather.databinding.FragmentDetailsBinding
 import com.kfjohnny.pokweather.model.moves.Moves
 import com.kfjohnny.pokweather.ui.description.adapter.MovesAdapter
-import com.kfjohnny.pokweather.util.changeDynamicToolbarBackgroundColor
 import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
@@ -26,14 +25,11 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
 
     private val detailsViewModel by viewModel<DetailsViewModel>()
 
-    val args: DetailsFragmentArgs by navArgs()
+    private val args: DetailsFragmentArgs by navArgs()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
-
+        binding.sflMainShimmer.startShimmer()
         val pokemonId = args.pokemonId
 
         detailsViewModel.loadPokemon(pokemonId)
@@ -41,15 +37,17 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
         binding.detailsViewModel = detailsViewModel
 
         configureLiveData()
+
+
         return binding.root
     }
 
     private fun configureLiveData() {
-        detailsViewModel.pokemonData.observe(viewLifecycleOwner, Observer {
+        detailsViewModel.pokemonData.observe(viewLifecycleOwner, Observer {pokemon ->
             //Changing background color dynamically by the pokemon dominant color
-            activity?.let { it1 -> changeDynamicToolbarBackgroundColor(it, it1, binding.cvBackground) }
-
-            it.moves?.let { it1 -> configuraRecyclerView(it1) }
+            pokemon.moves?.let { listMoves -> configuraRecyclerView(listMoves) }
+            binding.sflMainShimmer.stopShimmer()
+            binding.sflMainShimmer.hideShimmer()
         })
     }
 

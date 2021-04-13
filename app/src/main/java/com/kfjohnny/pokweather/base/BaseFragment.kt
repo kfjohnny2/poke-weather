@@ -5,13 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.kfjohnny.pokweather.ui.main.MainViewModel
+import com.kfjohnny.pokweather.R
+import com.kfjohnny.pokweather.ui.description.DetailsFragment
+import com.kfjohnny.pokweather.util.extensions.setBackgroundColorFromId
+import com.kfjohnny.pokweather.util.extensions.setTitleTextColorFromId
 
 abstract class BaseFragment<D : ViewDataBinding> : Fragment(), LifecycleOwner {
     protected lateinit var binding : D
@@ -21,10 +23,6 @@ abstract class BaseFragment<D : ViewDataBinding> : Fragment(), LifecycleOwner {
 
 
     protected fun tagFragment(): String = javaClass.simpleName
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,4 +35,12 @@ abstract class BaseFragment<D : ViewDataBinding> : Fragment(), LifecycleOwner {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        if(tagFragment() != DetailsFragment().tagFragment()){
+            val toolbar = activity?.findViewById<Toolbar>(R.id.tbMain)
+            toolbar?.setBackgroundColorFromId(R.color.colorPrimary)
+            toolbar?.setTitleTextColorFromId(R.color.white)
+        }
+    }
 }
