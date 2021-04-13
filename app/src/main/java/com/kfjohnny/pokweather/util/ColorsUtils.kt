@@ -12,12 +12,31 @@ import com.bumptech.glide.request.transition.Transition
 import com.kfjohnny.pokweather.R
 import com.kfjohnny.pokweather.model.pokemon.Pokemon
 
-fun changeDynamicBackgroundColor(it: Pokemon, activity: Activity) {
-    changeDynamicBackgroundColor(it, activity, null)
+/**
+ * @author Johnnylee Rocha (kfjohnny2)
+ *
+ * File for functions related to color operations, replacement, backgrounds and etc
+ */
+
+/**
+ * Function for changing only toolbar color
+ *
+ * @params [see overloaded function]
+ */
+fun changeDynamicToolbarBackgroundColor(pokemon: Pokemon, activity: Activity) {
+    changeDynamicToolbarBackgroundColor(pokemon, activity, null)
 }
 
-fun changeDynamicBackgroundColor(it: Pokemon, activity: Activity, secondaryView: View?) {
-    Glide.with(activity).asBitmap().load(it.sprites.frontDefault)
+/**
+ * Overloaded function to change toolbar background color and another dominant layout you want
+ * to colorize
+ *
+ * @param pokemon pokemon data for retrieving color palette by its sprites
+ * @param activity for retrieving toolbar
+ * @param secondaryView another view for colorize
+ */
+fun changeDynamicToolbarBackgroundColor(pokemon: Pokemon, activity: Activity, secondaryView: View?) {
+    Glide.with(activity).asBitmap().load(pokemon.sprites.frontDefault)
         .into(object : CustomTarget<Bitmap>() {
             override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                 // Pick one of the swatches

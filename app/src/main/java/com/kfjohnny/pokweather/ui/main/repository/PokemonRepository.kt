@@ -18,4 +18,6 @@ interface PokemonRepository{
     suspend fun insertPokemons(pokemonSampleList: List<PokemonSample>)
 
     suspend fun getPokemonLocal(): UseCaseResult<List<PokemonSample>>
+
+    suspend fun findPokemonByName(search : String): UseCaseResult<List<PokemonSample>>
 }

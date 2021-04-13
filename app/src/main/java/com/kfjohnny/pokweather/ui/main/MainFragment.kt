@@ -1,35 +1,28 @@
 package com.kfjohnny.pokweather.ui.main
 
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
 import com.kfjohnny.pokweather.R
 import com.kfjohnny.pokweather.base.BaseFragment
 import com.kfjohnny.pokweather.databinding.FragmentMainBinding
-import com.kfjohnny.pokweather.model.pokemon.Pokemon
 import com.kfjohnny.pokweather.model.search.PokemonSample
-import com.kfjohnny.pokweather.ui.description.adapter.MovesAdapter
 import com.kfjohnny.pokweather.ui.main.adapter.PokemonGridAdapter
-import com.kfjohnny.pokweather.util.changeDynamicBackgroundColor
-import com.kfjohnny.pokweather.util.extensions.hideKeyboard
+import com.kfjohnny.pokweather.util.changeDynamicToolbarBackgroundColor
 import org.koin.android.viewmodel.ext.android.viewModel
 
+/* -- Constant Values --*/
+const val GRID_VIEW_SPAN_LIMIT = 2
+
 /**
- * A simple [Fragment] subclass.
+ * @author Johnnylee Rocha (kfjohnny2) 15/02/2021
+ *
+ * [MainFragment] subclass for listing and searching pokemons.
  */
 class MainFragment : BaseFragment<FragmentMainBinding>() {
 
@@ -40,46 +33,48 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         super.onCreateView(inflater, container, savedInstanceState)
-        // Inflate the layout for this fragment
 
-        initViewModel()
+        // Start observers
+        initObservers()
 
         binding.mainViewModel = mainViewModel
-
-        binding.imgPokemonPic.setOnClickListener {
-            //navigateToDetails()
-        }
 
         return binding.root
     }
 
     private fun navigateToDetails(pokemonId: String) {
-        val directions = MainFragmentDirections.goToDetailsFragment()
-        directions.pokemonId = pokemonId
-        binding.root.findNavController().navigate(directions)
+        with(MainFragmentDirections.goToDetailsFragment()){
+            this.pokemonId = pokemonId
+            binding.root.findNavController().navigate(this)
+        }
     }
 
-    private fun initViewModel() {
-        mainViewModel.pokemonData.observe(viewLifecycleOwner, Observer {
-            hideKeyboard()
-            //Changing background color dynamically by the pokemon dominant color
-            activity?.let { it1 -> changeDynamicBackgroundColor(it, it1) }
-        })
+    /**
+     * Function for starting viewModel LiveData Observers functions
+     *
+     */
+    private fun initObservers() {
+        with(mainViewModel){
+            pokemonData.observe(viewLifecycleOwner, Observer {
+                //Changing background color dynamically by the pokemon dominant color
+                activity?.let { it1 -> changeDynamicToolbarBackgroundColor(it, it1) }
+            })
+            pokemonList.observe(viewLifecycleOwner, Observer {
+                configuraRecyclerView(it)
+            })
+            // Observe showLoading value and display or hide our activity's progressBar
+            showLoading.observe(viewLifecycleOwner, Observer { showLoading ->
+                //mainProgressBar.visibility = if (showLoading!!) View.VISIBLE else View.GONE
+            })
 
-        mainViewModel.pokemonList.observe(viewLifecycleOwner, Observer {
-            configuraRecyclerView(it)
-        })
-        // Observe showLoading value and display or hide our activity's progressBar
-        mainViewModel.showLoading.observe(viewLifecycleOwner, Observer { showLoading ->
-            //mainProgressBar.visibility = if (showLoading!!) View.VISIBLE else View.GONE
-        })
-        // Observe showError value and display the error message as a Toast
-        mainViewModel.showError.observe(viewLifecycleOwner, Observer { showError ->
-            Toast.makeText(context, showError, Toast.LENGTH_SHORT).show()
-        })
-        // The observers are set, we can now ask API to load a data list
+            // Observe showError value and display the error message as a Toast
+            showError.observe(viewLifecycleOwner, Observer { showError ->
+                Toast.makeText(context, showError, Toast.LENGTH_SHORT).show()
+            })
+            // The observers are set, we can now ask API to load a data list
+        }
     }
 
     private fun configuraRecyclerView(list: List<PokemonSample>) {
@@ -87,8 +82,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             navigateToDetails(pokemonId)
         }
         with(binding.rvPokemons) {
-            layoutManager = GridLayoutManager(context, 2)
+            layoutManager = GridLayoutManager(context, GRID_VIEW_SPAN_LIMIT)
             setHasFixedSize(true)
         }
     }
+
+
 }

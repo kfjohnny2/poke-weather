@@ -19,9 +19,22 @@ class PokemonRepositoryImpl(val pokemonApi: PokemonApi, val pokemonSampleDAO: Po
             if (result.isNotEmpty()) {
                 UseCaseResult.Success(result)
             } else {
-                UseCaseResult.Error(Throwable())
+                UseCaseResult.Empty()
             }
         } catch (ex: Exception) {
+            UseCaseResult.Error(ex)
+        }
+    }
+
+    override suspend fun findPokemonByName(search: String): UseCaseResult<List<PokemonSample>> {
+        val result = pokemonSampleDAO.findPokemonByNameOrID(search)
+        return try {
+            if (result.isNotEmpty()){
+                UseCaseResult.Success(result)
+            } else{
+                UseCaseResult.Empty()
+            }
+        } catch (ex: Exception){
             UseCaseResult.Error(ex)
         }
     }
