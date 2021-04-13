@@ -38,7 +38,7 @@ class RoomDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun writeUserAndReadInList() {
+    fun writePokemonAndReadTest() {
         val pokemonSample = PokemonSample(1, "teste", "urlSample")
         pokemonSampleDAO.createPokemon(pokemonSample)
         val byName = pokemonSampleDAO.findPokemonByName("teste")
