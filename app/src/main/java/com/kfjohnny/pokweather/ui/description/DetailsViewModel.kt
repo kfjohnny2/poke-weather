@@ -6,21 +6,25 @@ import com.kfjohnny.pokweather.base.BaseViewModel
 import com.kfjohnny.pokweather.base.UseCaseResult
 import com.kfjohnny.pokweather.model.pokemon.Pokemon
 import com.kfjohnny.pokweather.ui.main.repository.PokemonRepository
-import com.kfjohnny.pokweather.util.enum_classes.PokemonTypeResourceEnum
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class DetailsViewModel(private val pokemonRepository: PokemonRepository) : BaseViewModel()  {
+    /* Live data for observers */
     val pokemonData = MutableLiveData<Pokemon>()
-    private var filters: MutableList<PokemonTypeResourceEnum> = PokemonTypeResourceEnum.values().toMutableList()
 
-    fun loadPokemon(pokemonSearch : String) {
-        val search = pokemonSearch
+    /**
+     * Loads pokemon details from itemClicked on MainFragment's RecyclerViewAdapter
+     *
+     * @param pokemonId PokemonID for retrieving details
+     */
+    fun loadPokemon(pokemonId : String) {
+        val id = pokemonId
         showLoading.value = true
 
         launch {
-            val result = withContext(Dispatchers.IO) { pokemonRepository.getPokemon(search) }
+            val result = withContext(Dispatchers.IO) { pokemonRepository.getPokemon(id) }
 
             showLoading.value = false
 

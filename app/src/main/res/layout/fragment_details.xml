@@ -108,12 +108,25 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txtPokemonName">
 
-                <ImageView
-                    android:id="@+id/ivType"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:contentDescription="@{StringExtensionsKt.upperCaseFirstCharacter(detailsViewModel.pokemonData.types.get(0).type.typeName)}"
-                    />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/ivType"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:contentDescription="@{StringExtensionsKt.upperCaseFirstCharacter(detailsViewModel.pokemonData.types.get(0).type.typeName)}"
+                        />
+                    <ImageView
+                        android:id="@+id/ivType2"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="5dp"
+                        android:visibility="gone"
+                        android:contentDescription="@{StringExtensionsKt.upperCaseFirstCharacter(detailsViewModel.pokemonData.types.get(0).type.typeName)}"
+                        />
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/txtPokemonTypeLabel"

@@ -13,6 +13,7 @@ import com.kfjohnny.pokweather.base.BaseFragment
 import com.kfjohnny.pokweather.databinding.FragmentDetailsBinding
 import com.kfjohnny.pokweather.model.moves.Moves
 import com.kfjohnny.pokweather.model.pokemon.Pokemon
+import com.kfjohnny.pokweather.model.types.Types
 import com.kfjohnny.pokweather.ui.description.adapter.MovesAdapter
 import com.kfjohnny.pokweather.util.enum_classes.PokemonTypeResourceEnum
 import com.kfjohnny.pokweather.util.extensions.setDrawableFromId
@@ -51,7 +52,14 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
         detailsViewModel.pokemonData.observe(viewLifecycleOwner, Observer {pokemon ->
             //Changing background color dynamically by the pokemon dominant color
             pokemon.moves?.let { listMoves -> configuraRecyclerView(listMoves) }
-            binding.ivType.setDrawableFromId(getTypeResId(pokemon))
+            with(pokemon.types){
+                binding.ivType.setDrawableFromId(getPokemonTypesResId(this)[0].resId)
+                if(this?.size!! > 1){
+                    binding.ivType2.visibility = View.VISIBLE
+                    binding.ivType2.setDrawableFromId(getPokemonTypesResId(this)[1].resId)
+                }
+
+            }
             binding.sflMainShimmer.stopShimmer()
             binding.sflMainShimmer.hideShimmer()
         })
@@ -66,8 +74,12 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
         }
     }
 
-    fun getTypeResId(pokemon : Pokemon) : Int {
-        return filters.firstOrNull { pokemon.types?.firstOrNull()?.type?.typeName.toString() in it.typeName }?.resId!!
-    }
-
+    /**
+     * Get all types icon resources for imageView
+     *
+     * @param type List of pokémon types for retrieving resources from PokemonTypeResourceEnum
+     *
+     * @return List<PokemonTypeResourceEnum> list of type enum
+     */
+    private fun getPokemonTypesResId(type: List<Types>?) = filters.filter { enum -> type?.any { it.type?.typeName == enum.typeName }!! }
 }

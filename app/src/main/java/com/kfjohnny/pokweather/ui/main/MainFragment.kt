@@ -87,5 +87,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         }
     }
 
+    override fun onDestroy() {
+        binding.rvPokemons.adapter = null
+        super.onDestroy()
+    }
 
 }
