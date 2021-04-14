@@ -48,6 +48,6 @@ interface PokemonSampleDAO{
      * Search first pokemon on database (only for checking if there's data)
      * @return PokemonSample First pokemon
      */
-    @Query("SELECT * FROM pokemon_sample LIMIT 100")
-    fun getPokemonsLocal(): List<PokemonSample>
+    @Query("SELECT * FROM pokemon_sample LIMIT :limit ")
+    fun getPokemonsLocal(limit : Int = 100): List<PokemonSample>
 }
