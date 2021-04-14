@@ -54,6 +54,13 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
         })
     }
 
+    private fun applySilhuetteToImageView(){
+        val matrix = ColorMatrix()
+        matrix.setScale(0f, 0f, 0f, 100f)
+        val colorFilter = ColorMatrixColorFilter(matrix)
+        binding.ivPokemonImages.colorFilter= colorFilter
+    }
+
     private fun configuraRecyclerView(list: List<Moves>) {
         binding.rvMoves.adapter = MovesAdapter(list.toMutableList())
         with(binding.rvMoves) {
