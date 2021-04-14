@@ -1,7 +1,5 @@
 package com.kfjohnny.pokweather.ui.description
 
-import android.graphics.ColorMatrix
-import android.graphics.ColorMatrixColorFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +12,11 @@ import com.kfjohnny.pokweather.R
 import com.kfjohnny.pokweather.base.BaseFragment
 import com.kfjohnny.pokweather.databinding.FragmentDetailsBinding
 import com.kfjohnny.pokweather.model.moves.Moves
+import com.kfjohnny.pokweather.model.pokemon.Pokemon
+import com.kfjohnny.pokweather.model.types.Types
 import com.kfjohnny.pokweather.ui.description.adapter.MovesAdapter
+import com.kfjohnny.pokweather.util.enum_classes.PokemonTypeResourceEnum
+import com.kfjohnny.pokweather.util.extensions.setDrawableFromId
 import kotlinx.android.synthetic.main.fragment_details.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -24,6 +26,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
  * [DetailsFragment] for retrieving selected pokemon data
  */
 class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
+    private var filters: MutableList<PokemonTypeResourceEnum> = PokemonTypeResourceEnum.values().toMutableList()
 
     override fun layoutRes(): Int = R.layout.fragment_details
 
@@ -49,6 +52,14 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
         detailsViewModel.pokemonData.observe(viewLifecycleOwner, Observer {pokemon ->
             //Changing background color dynamically by the pokemon dominant color
             pokemon.moves?.let { listMoves -> configuraRecyclerView(listMoves) }
+            with(pokemon.types){
+                binding.ivType.setDrawableFromId(getPokemonTypesResId(this)[0].resId)
+                if(this?.size!! > 1){
+                    binding.ivType2.visibility = View.VISIBLE
+                    binding.ivType2.setDrawableFromId(getPokemonTypesResId(this)[1].resId)
+                }
+
+            }
             binding.sflMainShimmer.stopShimmer()
             binding.sflMainShimmer.hideShimmer()
         })
@@ -63,4 +74,12 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
         }
     }
 
+    /**
+     * Get all types icon resources for imageView
+     *
+     * @param type List of pokémon types for retrieving resources from PokemonTypeResourceEnum
+     *
+     * @return List<PokemonTypeResourceEnum> list of type enum
+     */
+    private fun getPokemonTypesResId(type: List<Types>?) = filters.filter { enum -> type?.any { it.type?.typeName == enum.typeName }!! }
 }
