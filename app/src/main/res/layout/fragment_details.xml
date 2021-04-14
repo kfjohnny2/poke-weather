@@ -10,6 +10,7 @@
             type="com.kfjohnny.pokweather.ui.description.DetailsViewModel" />
 
         <import type="com.kfjohnny.pokweather.util.extensions.StringExtensionsKt" />
+        <import type="com.kfjohnny.pokweather.util.enum_classes.PokemonTypeResourceEnum" />
 
     </data>
 
@@ -101,21 +102,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_horizontal_margin"
-                android:layout_marginTop="@dimen/default_vertical_margin"
                 android:gravity="center"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txtPokemonName">
 
-                <TextView
-                    android:id="@+id/txtPokemonType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_search"
-                    android:text="@{StringExtensionsKt.upperCaseFirstCharacter(detailsViewModel.pokemonData.types.get(0).type.typeName)}"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                <ImageView
+                    android:id="@+id/ivType"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:contentDescription="@{StringExtensionsKt.upperCaseFirstCharacter(detailsViewModel.pokemonData.types.get(0).type.typeName)}"
+                    />
 
                 <TextView
                     android:id="@+id/txtPokemonTypeLabel"
