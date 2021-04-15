@@ -2,10 +2,8 @@ package com.kfjohnny.pokweather.ui.description
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.kfjohnny.pokweather.base.BaseViewModel
 import com.kfjohnny.pokweather.base.UseCaseResult
-import com.kfjohnny.pokweather.model.pokemon.Ability
 import com.kfjohnny.pokweather.model.pokemon.Pokemon
 import com.kfjohnny.pokweather.ui.main.repository.PokemonRepository
 import kotlinx.coroutines.Dispatchers
@@ -13,14 +11,20 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class DetailsViewModel(private val pokemonRepository: PokemonRepository) : BaseViewModel()  {
+    /* Live data for observers */
     val pokemonData = MutableLiveData<Pokemon>()
 
-    fun loadPokemon(pokemonSearch : String) {
-        val search = pokemonSearch
+    /**
+     * Loads pokemon details from itemClicked on MainFragment's RecyclerViewAdapter
+     *
+     * @param pokemonId PokemonID for retrieving details
+     */
+    fun loadPokemon(pokemonId : String) {
+        val id = pokemonId
         showLoading.value = true
 
         launch {
-            val result = withContext(Dispatchers.IO) { pokemonRepository.getPokemon(search) }
+            val result = withContext(Dispatchers.IO) { pokemonRepository.getPokemon(id) }
 
             showLoading.value = false
 
@@ -33,4 +37,5 @@ class DetailsViewModel(private val pokemonRepository: PokemonRepository) : BaseV
             }
         }
     }
+
 }
