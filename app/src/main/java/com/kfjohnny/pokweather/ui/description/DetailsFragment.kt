@@ -1,5 +1,6 @@
 package com.kfjohnny.pokweather.ui.description
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,15 +9,16 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.transition.MaterialContainerTransform
 import com.kfjohnny.pokweather.R
 import com.kfjohnny.pokweather.base.BaseFragment
 import com.kfjohnny.pokweather.databinding.FragmentDetailsBinding
 import com.kfjohnny.pokweather.model.moves.Moves
-import com.kfjohnny.pokweather.model.pokemon.Pokemon
 import com.kfjohnny.pokweather.model.types.Types
 import com.kfjohnny.pokweather.ui.description.adapter.MovesAdapter
 import com.kfjohnny.pokweather.util.enum_classes.PokemonTypeResourceEnum
 import com.kfjohnny.pokweather.util.extensions.setDrawableFromId
+import com.kfjohnny.pokweather.util.extensions.themeColor
 import kotlinx.android.synthetic.main.fragment_details.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
