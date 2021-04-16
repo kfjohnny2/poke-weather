@@ -60,8 +60,8 @@
                 style="?android:attr/starStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toStartOf="@id/clPokemonDetailsContent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clPokemonDetailsContent"
