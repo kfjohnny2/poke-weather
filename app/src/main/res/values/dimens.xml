@@ -2,6 +2,7 @@
 <resources>
     <dimen name="default_padding_size">20dp</dimen>
     <dimen name="default_padding_half_size">10dp</dimen>
+    <dimen name="small_padding_half_size">5dp</dimen>
     <dimen name="default_vertical_margin">10dp</dimen>
     <dimen name="default_horizontal_margin">10dp</dimen>
     <dimen name="main_pokemon_title_size">26sp</dimen>

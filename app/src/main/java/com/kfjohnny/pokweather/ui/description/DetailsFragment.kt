@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +16,7 @@ import com.kfjohnny.pokweather.databinding.FragmentDetailsBinding
 import com.kfjohnny.pokweather.model.moves.Moves
 import com.kfjohnny.pokweather.model.types.Types
 import com.kfjohnny.pokweather.ui.description.adapter.MovesAdapter
+import com.kfjohnny.pokweather.ui.main.MainFragmentDirections
 import com.kfjohnny.pokweather.util.enum_classes.PokemonTypeResourceEnum
 import com.kfjohnny.pokweather.util.extensions.setDrawableFromId
 import kotlinx.android.synthetic.main.fragment_details.*
@@ -59,9 +62,19 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
                 }
 
             }
+            binding.ivPokemonImages.setOnClickListener {
+                //navigateToPager()
+            }
             binding.sflMainShimmer.stopShimmer()
             binding.sflMainShimmer.hideShimmer()
         })
+    }
+
+    private fun navigateToPager() {
+        with(DetailsFragmentDirections.actionDetailsFragmentToPokemonPagerFragment()){
+            binding.root.findNavController().navigate(this)
+        }
+
     }
 
     private fun configuraRecyclerView(list: List<Moves>) {

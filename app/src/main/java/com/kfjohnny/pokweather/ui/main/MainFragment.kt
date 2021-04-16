@@ -1,5 +1,6 @@
 package com.kfjohnny.pokweather.ui.main
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,11 +16,11 @@ import com.kfjohnny.pokweather.databinding.FragmentMainBinding
 import com.kfjohnny.pokweather.model.search.PokemonSample
 import com.kfjohnny.pokweather.ui.main.adapter.PokemonGridAdapter
 import com.kfjohnny.pokweather.util.changeDynamicToolbarBackgroundColor
-import kotlinx.android.synthetic.main.item_pokemon_grid.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 /* -- Constant Values --*/
-const val GRID_VIEW_SPAN_LIMIT = 2
+const val GRID_VIEW_SPAN_LIMIT_PORTRAIT = 2
+const val GRID_VIEW_SPAN_LIMIT_LANDSCAPE = 4
 
 /**
  * @author Johnnylee Rocha (kfjohnny2) 15/02/2021
@@ -85,14 +86,13 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), PokemonGridAdapter.Pok
     private fun configuraRecyclerView(list: List<PokemonSample>) {
         binding.rvPokemons.adapter = PokemonGridAdapter(list.toMutableList(), this)
         with(binding.rvPokemons) {
-            layoutManager = GridLayoutManager(context, GRID_VIEW_SPAN_LIMIT)
+            layoutManager = when(resources.configuration.orientation){
+                Configuration.ORIENTATION_PORTRAIT ->GridLayoutManager(context, GRID_VIEW_SPAN_LIMIT_PORTRAIT)
+                Configuration.ORIENTATION_LANDSCAPE ->GridLayoutManager(context, GRID_VIEW_SPAN_LIMIT_LANDSCAPE)
+                else -> GridLayoutManager(context, GRID_VIEW_SPAN_LIMIT_PORTRAIT)
+            }
             setHasFixedSize(true)
         }
-    }
-
-    override fun onDestroy() {
-        binding.rvPokemons.adapter = null
-        super.onDestroy()
     }
 
     /* ******    Pokemon Grid RecyclerView Listeners *************/
