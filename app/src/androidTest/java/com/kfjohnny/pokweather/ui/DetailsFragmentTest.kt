@@ -20,7 +20,6 @@ import org.junit.runner.RunWith
 class DetailsFragmentTest {
     @Before
     fun setupFragment(){
-        // The "fragmentArgs" and "factory" arguments are optional.
         val fragmentArgs = Bundle(1).apply {
             putString("pokemonId", "2")
         }
