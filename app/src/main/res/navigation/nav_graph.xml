@@ -28,13 +28,5 @@
             android:name="pokemonId"
             app:argType="string"
             android:defaultValue='""' />
-        <action
-            android:id="@+id/action_detailsFragment_to_pokemonPagerFragment"
-            app:destination="@id/pokemonPagerFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/pokemonPagerFragment"
-        android:name="com.kfjohnny.pokweather.ui.pokemon_pager.PokemonPagerFragment"
-        android:label="Pókemon Pager"
-        tools:layout="@layout/fragment_pokemon_pager" />
 </navigation>

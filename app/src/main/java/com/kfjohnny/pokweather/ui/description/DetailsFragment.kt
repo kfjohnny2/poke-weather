@@ -22,6 +22,8 @@ import com.kfjohnny.pokweather.util.extensions.setDrawableFromId
 import kotlinx.android.synthetic.main.fragment_details.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
+const val INDEX_FIRST_POKEMON_TYPE = 0
+const val INDEX_SECOND_POKEMON_TYPE = 0
 /**
  * @author Johnnylee Rocha (kfjohnny2) 15/02/2021
  *
@@ -55,26 +57,19 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
             //Changing background color dynamically by the pokemon dominant color
             pokemon.moves?.let { listMoves -> configuraRecyclerView(listMoves) }
             with(pokemon.types){
-                binding.ivType.setDrawableFromId(getPokemonTypesResId(this)[0].resId)
+                binding.ivType.setDrawableFromId(getPokemonTypesResId(this)[INDEX_FIRST_POKEMON_TYPE].resId)
                 if(this?.size!! > 1){
                     binding.ivType2.visibility = View.VISIBLE
-                    binding.ivType2.setDrawableFromId(getPokemonTypesResId(this)[1].resId)
+                    binding.ivType2.setDrawableFromId(getPokemonTypesResId(this)[INDEX_SECOND_POKEMON_TYPE].resId)
                 }
 
             }
             binding.ivPokemonImages.setOnClickListener {
-                //navigateToPager()
+                //TODO: Implement something here later
             }
             binding.sflMainShimmer.stopShimmer()
             binding.sflMainShimmer.hideShimmer()
         })
-    }
-
-    private fun navigateToPager() {
-        with(DetailsFragmentDirections.actionDetailsFragmentToPokemonPagerFragment()){
-            binding.root.findNavController().navigate(this)
-        }
-
     }
 
     private fun configuraRecyclerView(list: List<Moves>) {
