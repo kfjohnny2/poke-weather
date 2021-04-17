@@ -14,7 +14,6 @@
 
     </data>
     <com.google.android.material.card.MaterialCardView
-        android:theme="@style/Theme.MaterialComponents.Light"
         android:transitionName="@string/main_pokemon_card_detail_transition_name"
         android:id="@+id/detail_card_view"
         android:layout_width="match_parent"
@@ -33,8 +32,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <ImageView
                     android:id="@+id/ivPokemonImages"
@@ -43,35 +42,38 @@
                     android:src="@mipmap/ic_launcher"
                     app:glideSrc="@{@string/image_resource_api_base_url + detailsViewModel.pokemonData.pokemonId+ @string/image_resource_png_extension_type }" />
             </com.facebook.shimmer.ShimmerFrameLayout>
+            <TextView
+                android:id="@+id/txtPokemonName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_vertical_margin"
+                android:text="@{StringExtensionsKt.upperCaseFirstCharacter(detailsViewModel.pokemonData.pokemonName)}"
+                android:textSize="@dimen/main_pokemon_title_size"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/sflMainShimmer"
+                app:layout_constraintStart_toStartOf="@id/sflMainShimmer"
+                app:layout_constraintEnd_toEndOf="@id/sflMainShimmer"
+                tools:text="POKEMON NAME"/>
 
             <CheckBox
                 android:id="@+id/cbFav"
                 style="?android:attr/starStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toStartOf="@id/clPokemonDetailsContent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clPokemonDetailsContent"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="@dimen/default_vertical_margin"
+                android:layout_marginStart="@dimen/default_horizontal_margin"
                 android:background="@drawable/bg_listing_shape"
+                app:layout_constraintStart_toEndOf="@id/sflMainShimmer"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sflMainShimmer">
+                app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/txtPokemonName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/default_vertical_margin"
-                    android:text="@{StringExtensionsKt.upperCaseFirstCharacter(detailsViewModel.pokemonData.pokemonName)}"
-                    android:textSize="@dimen/main_pokemon_title_size"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
                     android:id="@+id/llPokemonWeight"
@@ -82,7 +84,7 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/txtPokemonName">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
                         android:id="@+id/txtPokemonWeight"
@@ -111,7 +113,7 @@
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/txtPokemonName">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -153,7 +155,7 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/txtPokemonName">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
                         android:id="@+id/txtPokemonHeight"

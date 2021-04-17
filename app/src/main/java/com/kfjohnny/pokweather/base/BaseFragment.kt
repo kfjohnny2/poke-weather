@@ -16,7 +16,7 @@ import com.kfjohnny.pokweather.util.extensions.setBackgroundColorFromId
 import com.kfjohnny.pokweather.util.extensions.setTitleTextColorFromId
 
 abstract class BaseFragment<D : ViewDataBinding> : Fragment(), LifecycleOwner {
-    protected lateinit var binding : D
+    protected lateinit var binding: D
 
     @LayoutRes
     protected abstract fun layoutRes(): Int
@@ -35,12 +35,4 @@ abstract class BaseFragment<D : ViewDataBinding> : Fragment(), LifecycleOwner {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-        if(tagFragment() != DetailsFragment().tagFragment()){
-            val toolbar = activity?.findViewById<Toolbar>(R.id.tbMain)
-            toolbar?.setBackgroundColorFromId(R.color.colorPrimary)
-            toolbar?.setTitleTextColorFromId(R.color.white)
-        }
-    }
 }

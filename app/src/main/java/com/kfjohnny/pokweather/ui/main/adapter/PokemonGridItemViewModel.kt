@@ -1,6 +1,5 @@
 package com.kfjohnny.pokweather.ui.main.adapter
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.kfjohnny.pokweather.base.BaseViewModel
 import com.kfjohnny.pokweather.model.search.PokemonSample
@@ -23,7 +22,7 @@ open class PokemonGridItemViewModel : BaseViewModel() {
         return src
     }
 
-    fun getPokemonId() : LiveData<String> {
-        return pokemonId
+    fun getPokemonId() : String {
+        return pokemonId.value!!
     }
 }
