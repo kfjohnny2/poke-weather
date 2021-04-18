@@ -14,3 +14,4 @@ On this project was used MVVM with dependecy injection using Koin, Retrofit for 
     - Lifecycle ViewModel
     - Retrofit
     - Unit Test
+    - Instrumented Test
