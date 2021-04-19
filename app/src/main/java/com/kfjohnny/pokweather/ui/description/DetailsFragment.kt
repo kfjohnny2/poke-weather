@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_details.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 const val INDEX_FIRST_POKEMON_TYPE = 0
-const val INDEX_SECOND_POKEMON_TYPE = 0
+const val INDEX_SECOND_POKEMON_TYPE = 1
 /**
  * @author Johnnylee Rocha (kfjohnny2) 15/02/2021
  *
