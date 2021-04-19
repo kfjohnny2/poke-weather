@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             app:mutableText="@{movesViewModel.getMoveName()}"
             app:layout_constraintStart_toStartOf="parent"
-            android:textColor="#000000"
+            android:textSize="@dimen/text_title_size_16sp"
             app:layout_constraintTop_toTopOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

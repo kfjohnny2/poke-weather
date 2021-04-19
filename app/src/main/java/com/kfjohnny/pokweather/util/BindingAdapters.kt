@@ -114,36 +114,6 @@ fun setGlideSrc(view: ImageView, text: String?) {
 }
 
 /**
- * Binding function: Loading image url with glide library into image view
- *
- * @param view  ImageView to apply image
- * @param primarySrc  Image URL for loading src
- */
-@BindingAdapter("bind:primaryGlideSrc", "bind:secondaryGlideSrc")
-fun setGlideSrcWithSecondaryImage(view: ImageView, primarySrc: String?, secondarySrc : String?) {
-    val parentActivity: AppCompatActivity? = view.getParentActivity()
-    if (parentActivity != null && primarySrc != null) {
-        Glide.with(view.context).asBitmap().load(primarySrc).diskCacheStrategy(DiskCacheStrategy.DATA).into(
-                object: CustomTarget<Bitmap>(){
-                    override fun onResourceReady(
-                        resource: Bitmap,
-                        transition: Transition<in Bitmap>?
-                    ) {
-                        view.setImageBitmap(resource)
-                    }
-
-                    override fun onLoadCleared(placeholder: Drawable?) {
-                    }
-
-                    override fun onLoadFailed(errorDrawable: Drawable?) {
-                        super.onLoadFailed(errorDrawable)
-                        Glide.with(view.context).load(secondarySrc).into(view)
-                    }
-                })
-    }
-}
-
-/**
  * Binding function: Items for replacing items into adapter
  *
  * @param recyclerView  RecyclerView to apply new items

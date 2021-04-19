@@ -1,6 +1,7 @@
 package com.kfjohnny.pokweather.ui.main.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -9,15 +10,13 @@ import com.kfjohnny.pokweather.databinding.ItemPokemonGridBinding
 import com.kfjohnny.pokweather.model.search.PokemonSample
 import com.kfjohnny.pokweather.util.helpers.AdapterItemsContract
 
-class PokemonGridAdapter(private var pokemons: MutableList<PokemonSample>, private val onPokemonClickListener : (String) -> Unit) : RecyclerView.Adapter<PokemonGridAdapter.PokemonGridViewHolder>(), AdapterItemsContract {
-    class PokemonGridViewHolder(val binding: ItemPokemonGridBinding) : RecyclerView.ViewHolder(binding.root) {
-        private val pokemonGridItemViewModel = PokemonGridItemViewModel()
-        fun bind(pokemonSample: PokemonSample, onPokemonClickListener: (String) -> Unit) {
-            pokemonGridItemViewModel.bind(pokemonSample)
-            binding.root.setOnClickListener { onPokemonClickListener(pokemonGridItemViewModel.getPokemonId().value!!)}
-            binding.pokemonGridViewModel = pokemonGridItemViewModel
-            binding.executePendingBindings()
-        }
+class PokemonGridAdapter(
+    private var pokemons: MutableList<PokemonSample>,
+    private val listener: PokemonGridAdapterListener
+) : RecyclerView.Adapter<PokemonGridViewHolder>(), AdapterItemsContract {
+
+    interface PokemonGridAdapterListener {
+        fun onPokemonClicked(cardView: View, pokemonId: String)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonGridViewHolder {
@@ -25,12 +24,12 @@ class PokemonGridAdapter(private var pokemons: MutableList<PokemonSample>, priva
         val binding: ItemPokemonGridBinding =
             DataBindingUtil.inflate(inflater, R.layout.item_pokemon_grid, parent, false)
 
-        return PokemonGridViewHolder(binding)
+        return PokemonGridViewHolder(binding, listener)
     }
 
     override fun onBindViewHolder(holder: PokemonGridViewHolder, position: Int) {
         val pokemonSample = pokemons[position]
-        holder.bind(pokemonSample, onPokemonClickListener)
+        holder.bind(pokemonSample)
     }
 
     override fun getItemCount(): Int = pokemons.size

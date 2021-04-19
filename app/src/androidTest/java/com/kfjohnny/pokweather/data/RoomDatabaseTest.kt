@@ -23,19 +23,21 @@ class RoomDatabaseTest {
     private lateinit var db: PokemonWeatherDatabase
 
     @Before
-    fun createDb(){
+    fun createDb() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         db = Room.inMemoryDatabaseBuilder(
-            context, PokemonWeatherDatabase::class.java).build()
+            context, PokemonWeatherDatabase::class.java
+        ).build()
         pokemonSampleDAO = db.pokemonSampleDao()
     }
 
     @After
     @Throws(IOException::class)
-    fun closeDb(){
+    fun closeDb() {
         db.close()
     }
 
+    /* ************              PokemonSampleDAO Test Starts here                 ****************/
     @Test
     @Throws(Exception::class)
     fun writePokemonAndReadTest() {
@@ -44,4 +46,34 @@ class RoomDatabaseTest {
         val byName = pokemonSampleDAO.findPokemonByName("teste")
         Assert.assertThat(byName.pokemonName, equalTo(pokemonSample.pokemonName))
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun writeAndListPokemonTest() {
+        val pokemonSample = listOf(
+            PokemonSample(1, "pikachu", "urlSample1"),
+            PokemonSample(2, "bulbasaur", "urlSample2")
+        )
+        pokemonSampleDAO.saveAll(pokemonSample)
+        val pokemonList = pokemonSampleDAO.getPokemonsLocal()
+        Assert.assertThat(pokemonList.size, equalTo(2))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun writePokemonAndFindByNameOrIdTest() {
+        val pokemonSample = listOf(
+            PokemonSample(1, "pikachu", "https://pokeapi.co/api/v2/pokemon/1/"),
+            PokemonSample(2, "bulbasaur", "https://pokeapi.co/api/v2/pokemon/2/")
+        )
+        pokemonSampleDAO.saveAll(pokemonSample)
+        val byNameStart = pokemonSampleDAO.findPokemonByNameOrID("bul")
+        val byNameEnd = pokemonSampleDAO.findPokemonByNameOrID("saur")
+        val byId = pokemonSampleDAO.findPokemonByNameOrID("2")
+        Assert.assertTrue(byNameStart.isNotEmpty())
+        Assert.assertTrue(byNameEnd.isNotEmpty())
+        Assert.assertThat(byId[0].pokemonName, equalTo("bulbasaur"))
+    }
+    /* ************              PokemonSampleDAO Test Ends Here                   ****************/
+
 }
