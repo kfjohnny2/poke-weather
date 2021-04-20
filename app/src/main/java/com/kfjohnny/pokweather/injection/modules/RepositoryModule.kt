@@ -10,6 +10,7 @@ import com.kfjohnny.pokweather.ui.description.DetailsViewModel
 import com.kfjohnny.pokweather.ui.main.MainViewModel
 import com.kfjohnny.pokweather.ui.main.repository.PokemonRepository
 import com.kfjohnny.pokweather.ui.main.repository.PokemonRepositoryImpl
+import com.kfjohnny.pokweather.ui.whodatpokemon.WhoDatPokemonViewModel
 import okhttp3.OkHttpClient
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
@@ -37,6 +38,7 @@ val repositoryModules = module {
     }
     viewModel { MainViewModel(get(named(POKEMON_REPOSITORY))) }
     viewModel { DetailsViewModel(get(named(POKEMON_REPOSITORY))) }
+    viewModel { WhoDatPokemonViewModel(get(named(POKEMON_REPOSITORY))) }
 }
 
 /* Returns a custom OkHttpClient instance with interceptor. Used for building Retrofit service */

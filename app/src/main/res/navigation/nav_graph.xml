@@ -28,5 +28,12 @@
             android:name="pokemonId"
             app:argType="string"
             android:defaultValue='""' />
+        <action
+            android:id="@+id/action_detailsFragment_to_whoDatPokemonFragment"
+            app:destination="@id/whoDatPokemonFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/whoDatPokemonFragment"
+        android:name="com.kfjohnny.pokweather.ui.whodatpokemon.WhoDatPokemonFragment"
+        android:label="WhoDatPokemonFragment" />
 </navigation>

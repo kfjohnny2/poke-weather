@@ -1,5 +1,7 @@
 package com.kfjohnny.pokweather.ui.description
 
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -46,9 +48,13 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
         detailsViewModel.loadPokemon(pokemonId)
 
         binding.detailsViewModel = detailsViewModel
-
         configureLiveData()
 
+        binding.txtPokemonName.setOnClickListener {
+            with(DetailsFragmentDirections.actionDetailsFragmentToWhoDatPokemonFragment()){
+                binding.root.findNavController().navigate(this)
+            }
+        }
         return binding.root
     }
 
@@ -70,13 +76,6 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
             binding.sflMainShimmer.stopShimmer()
             binding.sflMainShimmer.hideShimmer()
         })
-    }
-
-    private fun applySilhuetteToImageView(){
-        val matrix = ColorMatrix()
-        matrix.setScale(0f, 0f, 0f, 100f)
-        val colorFilter = ColorMatrixColorFilter(matrix)
-        binding.ivPokemonImages.colorFilter= colorFilter
     }
 
     private fun configuraRecyclerView(list: List<Moves>) {

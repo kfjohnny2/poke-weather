@@ -6,6 +6,7 @@
     <!-- Image Resource API Strings-->
     <string name="image_resource_api_base_url">https://pokeres.bastionbot.org/images/pokemon/</string>
     <string name="image_resource_png_extension_type">.png</string>
+    <string name="image_resource_complete_url">https://pokeres.bastionbot.org/images/pokemon/%s.png</string>
 
     <!-- Main Fragment Strings -->
     <string name="main_pokemon_name_or_id_hint">Pokémon name or id</string>
