@@ -17,7 +17,7 @@ class WhoDatPokemonViewModel(private val pokemonRepository: PokemonRepository) :
     val pokemonId = MutableLiveData<String>()
 
     init {
-        val randomId = Random.nextInt(1, 200)
+        val randomId = Random.nextInt(1, 151)
         loadPokemon(randomId.toString()/*randomId.toString()*/)
     }
     /**

@@ -19,4 +19,8 @@
     <string name="details_height_label">Height</string>
     <string name="details_type_label">Type</string>
     <string name="details_weight_label">Weight</string>
+
+    <!-- Assets path Strings -->
+    <string name="lottie_right_guess">right_guess.json</string>
+    <string name="lottie_wrong_guess">wrong_guess.json</string>
 </resources>
