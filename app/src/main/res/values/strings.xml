@@ -4,7 +4,7 @@
     <string name="app_name">PokéWeather</string>
 
     <!-- Image Resource API Strings-->
-    <string name="image_resource_api_base_url">https://pokeres.bastionbot.org/images/pokemon/</string>
+    <string name="image_resource_api_base_url">https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/</string>
     <string name="image_resource_png_extension_type">.png</string>
 
     <!-- Main Fragment Strings -->
