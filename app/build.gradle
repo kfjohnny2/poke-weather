@@ -127,6 +127,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0-alpha05'
     androidTestImplementation 'androidx.test:runner:1.4.0-alpha05'
     androidTestImplementation 'androidx.test:rules:1.4.0-alpha05'
+    androidTestImplementation "org.mockito:mockito-core:$mockito_version"
     debugImplementation ("androidx.fragment:fragment-testing:$fragment_version"){
         exclude group: 'androidx.test', module: 'monitor'
     }

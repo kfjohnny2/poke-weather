@@ -12,6 +12,9 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mock
+import org.mockito.Mockito.`when`
+import org.mockito.MockitoAnnotations
 import java.io.IOException
 
 /**
@@ -73,6 +76,28 @@ class RoomDatabaseTest {
         Assert.assertTrue(byNameStart.isNotEmpty())
         Assert.assertTrue(byNameEnd.isNotEmpty())
         Assert.assertThat(byId[0].pokemonName, equalTo("bulbasaur"))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun writeEmptyListPokemonTest() {
+        // Inserting an empty list
+        val pokemonSample = listOf<PokemonSample>()
+        pokemonSampleDAO.saveAll(pokemonSample)
+        val pokemonList = pokemonSampleDAO.getPokemonsLocal()
+        Assert.assertFalse(pokemonList.isNotEmpty())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun writeAndSearchNonExistingPokemonTest() {
+        val pokemonSample = listOf(
+            PokemonSample(1, "pikachu", "https://pokeapi.co/api/v2/pokemon/1/"),
+            PokemonSample(2, "bulbasaur", "https://pokeapi.co/api/v2/pokemon/2/")
+        )
+        pokemonSampleDAO.saveAll(pokemonSample)
+        val nonExistingPokemon = pokemonSampleDAO.findPokemonByNameOrID("charmander")
+        Assert.assertTrue(nonExistingPokemon.isNullOrEmpty())
     }
     /* ************              PokemonSampleDAO Test Ends Here                   ****************/
 
