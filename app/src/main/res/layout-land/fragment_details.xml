@@ -46,13 +46,13 @@
                 android:id="@+id/txtPokemonName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_vertical_margin"
                 android:text="@{StringExtensionsKt.upperCaseFirstCharacter(detailsViewModel.pokemonData.pokemonName)}"
                 android:textSize="@dimen/main_pokemon_title_size"
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@id/sflMainShimmer"
                 app:layout_constraintStart_toStartOf="@id/sflMainShimmer"
                 app:layout_constraintEnd_toEndOf="@id/sflMainShimmer"
+                app:layout_constraintBottom_toBottomOf="@id/clPokemonDetailsContent"
                 tools:text="POKEMON NAME"/>
 
             <CheckBox
@@ -61,7 +61,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toStartOf="@id/clPokemonDetailsContent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clPokemonDetailsContent"

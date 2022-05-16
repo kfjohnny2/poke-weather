@@ -4,11 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.kfjohnny.pokweather.R
 import com.kfjohnny.pokweather.databinding.ItemPokemonGridBinding
 import com.kfjohnny.pokweather.model.search.PokemonSample
 import com.kfjohnny.pokweather.util.helpers.AdapterItemsContract
+import com.kfjohnny.pokweather.util.helpers.DiffCallback
 
 class PokemonGridAdapter(
     private var pokemons: MutableList<PokemonSample>,
@@ -35,12 +37,15 @@ class PokemonGridAdapter(
     override fun getItemCount(): Int = pokemons.size
 
     override fun replaceItems(list: List<*>) {
+        val diffCallback = DiffCallback(this.pokemons, list)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        diffResult.dispatchUpdatesTo(this)
+
         if (pokemons.isNullOrEmpty()) {
-            pokemons = list as MutableList<PokemonSample>
+            pokemons = list.filterIsInstance<PokemonSample>().toMutableList()
         } else {
-            pokemons.addAll(list as MutableList<PokemonSample>)
+            pokemons.addAll(list.filterIsInstance<PokemonSample>().toMutableList())
         }
-        notifyDataSetChanged()
 
     }
 
