@@ -24,7 +24,7 @@ const val LIMIT_ALL_POKEMONS = 9999
  *
  * @param pokemonRepository Repository for request data (API and Local) functions
  */
-class MainViewModel(private val pokemonRepository: PokemonRepository) : BaseViewModel() {
+class MainViewModel(private val pokemonRepository: PokemonRepository, private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO) : BaseViewModel() {
     val pokemonData = MutableLiveData<Pokemon>()
     val pokemonList = MutableLiveData<List<PokemonSample>>()
 
@@ -42,7 +42,7 @@ class MainViewModel(private val pokemonRepository: PokemonRepository) : BaseView
         showLoading.value = true
         launch {
 
-            when(val localPokemon = withContext(Dispatchers.IO){pokemonRepository.getPokemonLocal()}){
+            when(val localPokemon = withContext(ioDispatcher){pokemonRepository.getPokemonLocal()}){
                 is UseCaseResult.Success ->{
                     pokemonList.value = localPokemon.data
                 }
